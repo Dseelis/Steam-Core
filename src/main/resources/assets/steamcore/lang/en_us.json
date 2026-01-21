@@ -1,0 +1,18 @@
+{
+  "item_group.steamcore.tab": "Steam Core",
+  "item.steamcore.eternal_core": "Eternal Core",
+  "block.steamcore.gamma_ore": "Gamma Ore",
+  "block.steamcore.eternal_ore": "Eternal Ore",
+  "item.steamcore.eternal_gem": "Eternal Gem",
+  "item.steamcore.empty_eternal_gem": "Empty Eternal Gem",
+  "block.steamcore.gamma_brick": "Gamma Brick",
+  "item.steamcore.wrench": "Wrench",
+  "item.steamcore.sword_part": "Sword Part",
+  "item.steamcore.sword_part_2": "Sword Part 2",
+  "item.steamcore.final_sword": "Final Sword",
+  "item.steamcore.unfinishedengineeringpress": "Unfinished Engineering Press",
+  "item.steamcore.unfinishedsiliconpress": "Unfinished Silicon Press",
+  "item.steamcore.unfinishedlogicpress": "Unfinished Logic Press",
+  "item.steamcore.unfinishedcalculationpress": "Unfinished Calculation Press",
+  "block.steamcore.sealed_block": "Sealed Block"
+}
