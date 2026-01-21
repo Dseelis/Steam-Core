@@ -1,0 +1,54 @@
+{
+  "name": "Основные книги заклинаний",
+  "icon": "irons_spellbooks:iron_spell_book",
+  "category": "irons_spellbooks:root",
+  "sortnum": 1,
+  "read_by_default" : true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Создаваемые книги заклинаний",
+      "text": "Многие книги заклинаний могут быть созданы из комбинации ванильных и тайных материалов. Каждый последующий созданный уровень увеличивает количество ячеек в книге заклинаний и часто дает дополнительные бонусы, увеличивая силу и количество заклинаний, которые она может содержать."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:copper_spell_book",
+      "recipe2": "irons_spellbooks:iron_spell_book"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:gold_spell_book",
+      "recipe2": "irons_spellbooks:diamond_spell_book"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:netherite_spell_book",
+      "recipe2": "irons_spellbooks:dragonskin_spell_book"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Именованные книги заклинаний",
+      "text": "Именованные книги заклинаний можно найти во многих уголках мира, часто предлагая бонусы удачливым искателям приключений, ищущим в нужных местах."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irons_spellbooks:rotten_spell_book",
+      "text": "То, что, возможно, когда-то было более мощной книгой, с тех пор сгнило, оставив лишь три страницы. Тем не менее, он все же более мощный, чем большинство книг заклинаний Верхнего мира. Их можно найти в одинаково гнилых местах по всему миру."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irons_spellbooks:villager_spell_book",
+      "text": "Обычная книга с небольшим благословением станет подходящим каналом для божественной магии. Создание репутации среди жителей деревни, особенно путем освобождения пленников от Архевокера, в конечном итоге гарантирует, что один из них попадет в ваши руки."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irons_spellbooks:blaze_spell_book",
+      "text": "Каждый Блейз, без его ведома, приносит с собой один из них. Хитрость заключается в том, чтобы убить их и надеяться, что они не превратятся в пепел."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:druidic_spell_book",
+      "text": "Сильная магическая энергия все еще сохраняется в Гнилой Книге Заклинаний. Книга может быть снова благословлена, если будет применено правильное средство."
+    }
+  ]
+}

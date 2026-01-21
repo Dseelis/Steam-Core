@@ -1,0 +1,75 @@
+{
+  "name": "Поздняя игра",
+  "icon": "irons_spellbooks:arcane_anvil",
+  "category": "irons_spellbooks:root",
+  "sortnum": -1,
+  "read_by_default" : true,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Чародейская наковальня",
+      "text": "Для поздней игры необходимо получить незерит и огромное количество основных ресурсов, а также использовать Чародейскую наковальню.$(br2)Чародейская наковальня — это самая мощная ремесленная станция, используемая для повышения уровня ваших свитков, улучшения брони и книг заклинаний, а также наделения оружие с заклинаниями."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:arcane_anvil"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Еще книги заклинаний",
+      "text": "Здесь показаны лучшие книги заклинаний, которые можно создать. Испорченная книга найдена в Древних городах.",
+      "recipe": "irons_spellbooks:netherite_spell_book"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:dragonskin_spell_book",
+      "text": "Драконья шкура падает с Эндер Дракона."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:cryomancer_helmet",
+      "recipe2": "irons_spellbooks:pyromancer_helmet",
+      "title": "Школьная броня"
+    },
+    {
+      "type": "patchouli:entity",
+      "name": "Пример: броня криоманта.",
+      "entity": "minecraft:armor_stand{ArmorItems:[{id:'irons_spellbooks:cryomancer_boots',Count:1b},{id:'irons_spellbooks:cryomancer_leggings',Count:1b},{id:'irons_spellbooks:cryomancer_chestplate',Count:1b},{id:'irons_spellbooks:cryomancer_helmet',Count:1b}],NoBasePlate:1b}",
+      "text": "Школьная броня изготавливается из тайной ткани и определенной школьной руны по этому шаблону."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "irons_spellbooks:upgrade_orb",
+      "title": "Обновление",
+      "text": "Улучшения — это конечная форма прогресса. По умолчанию любую броню, а также книги заклинаний можно улучшить.$(br2)Сферы улучшения определенного атрибута состоят из базовой сферы улучшения и 8 рун желаемого атрибута."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "irons_spellbooks:upgrade_orb",
+      "recipe2": "irons_spellbooks:fire_upgrade_orb"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Улучшите материалы для крафта",
+      "enable_visualize" : false,
+      "multiblock": {
+        "pattern": [
+          [ " D S ", "DA0PF"]
+        ],
+        "mapping": {
+          "D": "minecraft:deepslate",
+          "A": "irons_spellbooks:arcane_debris",
+          "P": "irons_spellbooks:armor_pile",
+          "S": "minecraft:soul_sand",
+          "F": "minecraft:soul_fire"
+        }
+      },
+      "text": "Чародейские обломки — это эквивалент Древнего обломка в Верхнем мире, который можно найти ниже y=-38. Для этого потребуется незеритовая кирка."
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "irons_spellbooks:citadel_keeper",
+      "text": "Сущность пепла выпадает из Древних рыцарей, которых можно разбудить, разбив груды доспехов в Пустоте."
+    }
+  ]
+}
