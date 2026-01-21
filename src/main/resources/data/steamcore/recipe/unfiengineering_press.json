@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create:electron_tube"
+    },
+    "b": {
+      "item": "tfmg:bitumen"
+    },
+    "c": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "g": {
+      "item": "tfmg:constantan_ingot"
+    }
+  },
+  "pattern": [
+    "gag",
+    "gbg",
+    "gcg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "steamcore:unfinishedengineeringpress"
+  }
+}

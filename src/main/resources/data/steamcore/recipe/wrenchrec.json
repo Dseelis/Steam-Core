@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "aba",
+    " a ",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:iron_ingot"
+    },
+    "b": {
+      "item": "steamcore:eternal_gem"
+    }
+  },
+  "result": {
+    "id": "steamcore:wrench",
+    "count": 1
+  }
+}

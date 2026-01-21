@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create:precision_mechanism"
+    },
+    "b": {
+      "item": "tfmg:bitumen"
+    },
+    "c": {
+      "item": "tfmg:magnet"
+    },
+    "g": {
+      "item": "tfmg:silicon_ingot"
+    }
+  },
+  "pattern": [
+    "gag",
+    "gbg",
+    "gcg"
+  ],
+  "result": {
+    "count": 1,
+    "id": "steamcore:unfinishedsiliconpress"
+  }
+}

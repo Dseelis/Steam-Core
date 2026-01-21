@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "cag",
+    "fbf",
+    "gac"
+  ],
+  "key": {
+    "a": {
+      "item": "tfmg:circuit_board"
+    },
+    "b": {
+      "item": "tfmg:bitumen"
+    },
+    "c": {
+      "item": "tfmg:p_semiconductor"
+    },
+    "g": {
+      "item": "tfmg:n_semiconductor"
+    },
+    "f": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:unfinishedlogicpress"
+  }
+}

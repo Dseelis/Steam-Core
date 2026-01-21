@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create:golden_sheet"
+    },
+    "b": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "bbb",
+    "a a",
+    "b b"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:gold_leggings"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "minecraft:quartz"
+    },
+    "b": {
+      "item": "tfmg:nitrate_dust"
+    },
+    "c": {
+      "item": "tfmg:thermite_powder"
+    }
+  },
+  "pattern": [
+    "cab",
+    "aaa",
+    "bac"
+  ],
+  "result": {
+    "count": 4,
+    "id": "ae2:certus_quartz_crystal"
+  }
+}

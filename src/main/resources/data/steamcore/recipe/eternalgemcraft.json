@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "experience": 1,
+  "cookingtime": 800,
+  "ingredient": {
+    "item": "steamcore:empty_eternal_gem"
+  },
+  "result": {
+    "id": "steamcore:eternal_gem"
+  }
+}

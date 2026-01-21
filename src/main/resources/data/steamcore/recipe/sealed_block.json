@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "afc",
+    "hbh",
+    "hgh"
+  ],
+  "key": {
+    "a": {
+      "item": "steamcore:unfinishedcalculationpress"
+    },
+    "b": {
+      "item": "steamcore:unfinishedengineeringpress"
+    },
+    "c": {
+      "item": "steamcore:unfinishedlogicpress"
+    },
+    "g": {
+      "item": "steamcore:unfinishedsiliconpress"
+    },
+    "f": {
+      "item": "tfmg:screw"
+    },
+    "h": {
+      "item": "tfmg:industrial_aluminum_casing"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:sealed_block"
+  }
+}

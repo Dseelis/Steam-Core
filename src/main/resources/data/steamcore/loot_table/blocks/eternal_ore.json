@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "steamcore:blocks/eternal_ore",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "steamcore:eternal_ore"
+        }
+      ]
+    }
+  ]
+}

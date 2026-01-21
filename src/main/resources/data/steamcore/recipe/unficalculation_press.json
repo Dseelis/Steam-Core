@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "create:electron_tube"
+    },
+    "b": {
+      "item": "tfmg:bitumen"
+    },
+    "c": {
+      "item": "ae2:certus_quartz_crystal"
+    },
+    "g": {
+      "item": "tfmg:circuit_board"
+    }
+  },
+  "pattern": [
+    "cac",
+    "cbc",
+    "cgc"
+  ],
+  "result": {
+    "count": 1,
+    "id": "steamcore:unfinishedcalculationpress"
+  }
+}
