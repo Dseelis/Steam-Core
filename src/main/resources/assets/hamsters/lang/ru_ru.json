@@ -1,0 +1,27 @@
+{
+  "itemGroup.hamsters.tab": "Хомяки",
+  "item.hamsters.hamsters": "Хомяки",
+
+  "entity.hamsters.hamster": "Хомяк",
+  "item.hamsters.hamster": "Хомяк",
+
+  "tooltip.hamsters.white": "Белый",
+  "tooltip.hamsters.peaches_and_cream": "Персиковый",
+  "tooltip.hamsters.orange": "Хамстер комбат",
+  "tooltip.hamsters.grey_white": "Серо-белый",
+  "tooltip.hamsters.brown": "Коричневый",
+  "tooltip.hamsters.black_white": "Черно-белый",
+  "tooltip.hamsters.black": "Черный",
+
+  "tooltip.hamsters.tamed": "Прирученный",
+  "tooltip.hamsters.baby": "Ребёнок",
+
+  "item.hamsters.hamster_spawn_egg": "Яйцо призыва хомяка",
+  "block.hamsters.tunnel": "Tunnel",
+  "block.hamsters.hamster_wheel": "Колесо для хомяков",
+
+  "hamsters.subtitles.hamster.ambient": "Hamster squeaks",
+  "hamsters.subtitles.hamster.hurt": "Hamster hurts",
+  "hamsters.subtitles.hamster.death": "Hamster dies",
+  "hamsters.subtitles.hamster.beg": "Hamster begs"
+}
