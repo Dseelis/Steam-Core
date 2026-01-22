@@ -9,6 +9,7 @@ version="1.0.4"
 description='''coremod for steamcore modpack.'''
 displayName="Steamcore"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
+issueTrackerURL = "https://github.com/Dseelis/Steam-Core/issues"
 authors="Dseelis"
 
 [[dependencies.steamcore]]
@@ -66,3 +67,4 @@ authors="Dseelis"
 #versionRange = "2101.1.13"
 #ordering = "AFTER"
 #side = "BOTH"
+
