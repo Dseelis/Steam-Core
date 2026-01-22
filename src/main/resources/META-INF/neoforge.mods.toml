@@ -1,12 +1,11 @@
 modLoader="javafml"
 loaderVersion="[4,)"
-license="Custom License"
+license="Steamcreate2 Mod Custom License"
 
 [[mods]]
 modId="steamcore"
 logoFile="icon.png"
 version="1.0.4"
-issueTrackerURL = "https://github.com/Dseelis/Steam-Core/issues"
 description='''coremod for steamcore modpack.'''
 displayName="Steamcore"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
@@ -25,43 +24,43 @@ authors="Dseelis"
     versionRange="[1.21.1]"
     ordering="AFTER"
     side="BOTH"
-
-#[[dependencies."${mod_id}"]]
+#Only on modrinth
+#[[dependencies.steamcore]]
 #modId = "ftbteams"
 #mandatory = true
 #versionRange = "2101.1.9"
 #ordering = "AFTER"
 #side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
+#[[dependencies.steamcore]]
 #modId = "ftblibrary"
 #mandatory = true
 #versionRange = "2101.1.30"
 #ordering = "AFTER"
 #side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
+#[[dependencies.steamcore]]
 #modId = "ftbquests"
 #mandatory = true
 #versionRange = "2101.1.21"
 #ordering = "AFTER"
 #side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
+#[[dependencies.steamcore]]
 #modId = "ftbfiltersystem"
 #mandatory = true
 #versionRange = "21.1.4"
 #ordering = "AFTER"
 #side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
+#[[dependencies.steamcore]]
 #modId = "ftbxmodcompat"
 #mandatory = true
 #versionRange = "21.1.7"
 #ordering = "AFTER"
 #side = "BOTH"
 
-#[[dependencies."${mod_id}"]]
+#[[dependencies.steamcore]]
 #modId = "ftbchunks"
 #mandatory = true
 #versionRange = "2101.1.13"
