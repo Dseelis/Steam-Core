@@ -1,5 +1,5 @@
 {
-  "item_group.steamcore.tab": "Steam Core",
+  "itemGroup.steamcore": "Steam Core",
   "item.steamcore.eternal_core": "Eternal Core",
   "block.steamcore.gamma_ore": "Gamma Ore",
   "block.steamcore.eternal_ore": "Eternal Ore",
@@ -10,9 +10,9 @@
   "item.steamcore.sword_part": "Sword Part",
   "item.steamcore.sword_part_2": "Sword Part 2",
   "item.steamcore.final_sword": "Final Sword",
-  "item.steamcore.unfinishedengineeringpress": "Unfinished Engineering Press",
-  "item.steamcore.unfinishedsiliconpress": "Unfinished Silicon Press",
-  "item.steamcore.unfinishedlogicpress": "Unfinished Logic Press",
-  "item.steamcore.unfinishedcalculationpress": "Unfinished Calculation Press",
+  "item.steamcore.unfinished_engineering_press": "Unfinished Engineering Press",
+  "item.steamcore.unfinished_silicon_press": "Unfinished Silicon Press",
+  "item.steamcore.unfinished_logic_press": "Unfinished Logic Press",
+  "item.steamcore.unfinished_calculation_press": "Unfinished Calculation Press",
   "block.steamcore.sealed_block": "Sealed Block"
 }

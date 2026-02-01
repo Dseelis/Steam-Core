@@ -8,16 +8,16 @@
   ],
   "key": {
     "a": {
-      "item": "steamcore:unfinishedcalculationpress"
+      "item": "steamcore:unfinished_calculation_press"
     },
     "b": {
-      "item": "steamcore:unfinishedengineeringpress"
+      "item": "steamcore:unfinished_engineering_press"
     },
     "c": {
-      "item": "steamcore:unfinishedlogicpress"
+      "item": "steamcore:unfinished_logic_press"
     },
     "g": {
-      "item": "steamcore:unfinishedsiliconpress"
+      "item": "steamcore:unfinished_silicon_press"
     },
     "f": {
       "item": "tfmg:screw"

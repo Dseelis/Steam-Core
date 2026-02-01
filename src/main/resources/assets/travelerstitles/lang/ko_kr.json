@@ -1,0 +1,43 @@
+{
+  "travelerstitles.minecraft.overworld": "\uE009",
+  "travelerstitles.minecraft.the_end": "\uE039",
+  "travelerstitles.minecraft.the_end.color": "ffffff",
+  "travelerstitles.minecraft.the_nether": "\uE058",
+  "travelerstitles.minecraft.the_nether.color": "ffffff",
+
+  "travelerstitles.ad_astra.earth_orbit": "\uE009",
+  "travelerstitles.ad_astra.glacio": "\uE073",
+  "travelerstitles.ad_astra.glacio_orbit": "\uE073",
+  "travelerstitles.ad_astra.mars": "\uE084",
+  "travelerstitles.ad_astra.mars_orbit": "\uE084",
+  "travelerstitles.ad_astra.mercury": "\uE097",
+  "travelerstitles.ad_astra.mercury_orbit": "\uE097",
+  "travelerstitles.ad_astra.moon": "\uE119",
+  "travelerstitles.ad_astra.moon_orbit": "\uE119",
+  "travelerstitles.ad_astra.venus": "\uE146",
+  "travelerstitles.ad_astra.venus_orbit": "\uE146",
+
+  "travelerstitles.beyond_earth.deimos": "\uE065",
+  "travelerstitles.beyond_earth.deimos_orbit": "\uE065",
+  "travelerstitles.beyond_earth.earth_orbit": "\uE009",
+  "travelerstitles.beyond_earth.glacio": "\uE073",
+  "travelerstitles.beyond_earth.glacio_orbit": "\uE073",
+  "travelerstitles.beyond_earth.mars": "\uE084",
+  "travelerstitles.beyond_earth.mars_orbit": "\uE084",
+  "travelerstitles.beyond_earth.mercury": "\uE097",
+  "travelerstitles.beyond_earth.mercury_orbit": "\uE097",
+  "travelerstitles.beyond_earth.moon": "\uE119",
+  "travelerstitles.beyond_earth.moon_orbit": "\uE119",
+  "travelerstitles.beyond_earth.phobos": "\uE134",
+  "travelerstitles.beyond_earth.phobos_orbit": "\uE134",
+  "travelerstitles.beyond_earth.venus": "\uE146",
+  "travelerstitles.beyond_earth.venus_orbit": "\uE146",
+
+  "travelerstitles.galacticraft.moon": "\uE119",
+  "travelerstitles.galacticraft.venus": "\uE146",
+
+  "travelerstitles.stellaris.mars": "\uE084",
+  "travelerstitles.stellaris.mercury": "\uE097",
+  "travelerstitles.stellaris.moon": "\uE119",
+  "travelerstitles.stellaris.venus": "\uE146"
+}
