@@ -1,0 +1,42 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="Steamcreate2 Mod Custom License"
+
+[[mods]]
+modId="steamcore"
+logoFile="icon.png"
+version="1.0.5b"
+description='''coremod for steamcore modpack.'''
+displayName="Steamcore"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
+issueTrackerURL="https://github.com/Dseelis/Steam-Core/issues"
+authors="Dseelis"
+
+[[dependencies.steamcore]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.218,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.steamcore]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[dependencies.steamcore]]
+modId = "ftblibrary"
+mandatory = true
+versionRange = "2101.1.30"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.steamcore]]
+modId = "ftbquests"
+mandatory = true
+versionRange = "2101.1.21"
+ordering = "AFTER"
+side = "BOTH"

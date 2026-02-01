@@ -1,0 +1,26 @@
+{
+  "travelerstitles.minecraft.overworld": "\uE007",
+  "travelerstitles.minecraft.the_end": "\uE037",
+  "travelerstitles.minecraft.the_end.color": "ffffff",
+  "travelerstitles.minecraft.the_nether": "\uE051",
+  "travelerstitles.minecraft.the_nether.color": "ffffff",
+
+  "travelerstitles.ad_astra.earth_orbit": "\uE007",
+  "travelerstitles.ad_astra.mercury": "\uE095",
+  "travelerstitles.ad_astra.mercury_orbit": "\uE095",
+  "travelerstitles.ad_astra.moon": "\uE116",
+  "travelerstitles.ad_astra.moon_orbit": "\uE116",
+
+  "travelerstitles.beyond_earth.earth_orbit": "\uE007",
+  "travelerstitles.beyond_earth.mercury": "\uE095",
+  "travelerstitles.beyond_earth.mercury_orbit": "\uE095",
+  "travelerstitles.beyond_earth.moon": "\uE116",
+  "travelerstitles.beyond_earth.moon_orbit": "\uE116",
+  "travelerstitles.beyond_earth.phobos": "\uE131",
+  "travelerstitles.beyond_earth.phobos_orbit": "\uE131",
+
+  "travelerstitles.galacticraft.moon": "\uE116",
+
+  "travelerstitles.stellaris.mercury": "\uE095",
+  "travelerstitles.stellaris.moon": "\uE116"
+}
