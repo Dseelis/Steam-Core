@@ -9,6 +9,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import com.steam.steamcore.command.GenerateModListCommand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -182,6 +184,11 @@ public class SteamCore {
         modEventBus.addListener(this::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    @SubscribeEvent
+    public void onRegisterCommands(RegisterCommandsEvent event) {
+        GenerateModListCommand.register(event.getDispatcher());
     }
 
     @SubscribeEvent
