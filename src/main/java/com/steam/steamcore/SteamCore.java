@@ -10,6 +10,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import com.steam.steamcore.command.PackInfoCommand;
 import com.steam.steamcore.command.GenerateModListCommand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -39,8 +40,10 @@ public class SteamCore {
 
     public static final String MODID = "steamcore";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final String PACK_NAME = "SteamCreate 2";
+    public static final String PACK_VERSION = "2.0.7b";
 
-    // ===== REGISTRIES =====
+    // REGISTRIES
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(MODID);
 
@@ -51,7 +54,7 @@ public class SteamCore {
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
 
-    // ======= BLOCKS ========
+    // BLOCKS
 
     public static final DeferredBlock<Block> GAMMA_BRICK =
             BLOCKS.registerSimpleBlock("gamma_brick",
@@ -73,7 +76,7 @@ public class SteamCore {
                     BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(4f));
 
 
-    // ===== BLOCK ITEMS =====
+    // BLOCK ITEMS
 
     public static final DeferredItem<BlockItem> GAMMA_BRICK_ITEM =
             ITEMS.registerSimpleBlockItem("gamma_brick", GAMMA_BRICK);
@@ -89,7 +92,7 @@ public class SteamCore {
             ITEMS.registerSimpleBlockItem("eternal_ore", ETERNAL_ORE);
 
 
-    // ======= ITEMS ========
+    // ITEMS
 
     public static final DeferredItem<Item> UNFINISHED_CALCULATION_PRESS =
             ITEMS.registerSimpleItem("unfinished_calculation_press");
@@ -136,7 +139,7 @@ public class SteamCore {
                     ));
 
 
-    // ===== CREATIVE TAB =====
+    // CREATIVE TAB
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> STEAM_TAB =
             CREATIVE_MODE_TABS.register("steam_tab", () ->
@@ -171,7 +174,7 @@ public class SteamCore {
             );
 
 
-    // ===== CONSTRUCTOR =====
+    // CONSTRUCTOR
 
     public SteamCore(IEventBus modEventBus, ModContainer modContainer) {
 
@@ -189,6 +192,7 @@ public class SteamCore {
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
         GenerateModListCommand.register(event.getDispatcher());
+        PackInfoCommand.register(event.getDispatcher());
     }
 
     @SubscribeEvent

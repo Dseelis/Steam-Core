@@ -13,6 +13,7 @@ public class Config {
 
     // DEBUG
     public static final ModConfigSpec.BooleanValue ENABLE_MODLIST_COMMAND;
+    public static final ModConfigSpec.BooleanValue ENABLE_PACKINFO_COMMAND;
 
     static {
 
@@ -31,6 +32,9 @@ public class Config {
         ENABLE_MODLIST_COMMAND = BUILDER
                 .comment("Enable /generatemodlist command")
                 .define("enableModlistCommand", false);
+        ENABLE_PACKINFO_COMMAND = BUILDER
+                .comment("Enable /packinfo command")
+                .define("enablePackinfoCommand", false);
 
 
         BUILDER.pop();
@@ -39,14 +43,4 @@ public class Config {
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 
-    // ===== Cached values =====
-    public static boolean showIntroMessages;
-    public static boolean enableModlistCommand;
-
-    @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
-
-        showIntroMessages = SHOW_INTRO_MESSAGES.get();
-        enableModlistCommand = ENABLE_MODLIST_COMMAND.get();
-    }
 }

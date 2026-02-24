@@ -17,5 +17,5 @@
   "block.steamcore.sealed_block": "Sealed Block",
   "item.steamcore.emptyeternalgem": "Emptyeternalgem",
   "gui.steamcore.eternal_infuser.label_infuser": "Infuser",
-  "item.steamcore.eternalinfuserblock": "Eternal Infuser Block"
+  "block.steamcore.eternal_infuser": "Eternal Infuser Block"
 }
