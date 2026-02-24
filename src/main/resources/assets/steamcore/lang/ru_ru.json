@@ -14,5 +14,8 @@
   "item.steamcore.unfinished_silicon_press": "Unfinished Silicon Press",
   "item.steamcore.unfinished_logic_press": "Unfinished Logic Press",
   "item.steamcore.unfinished_calculation_press": "Unfinished Calculation Press",
-  "block.steamcore.sealed_block": "Sealed Block"
+  "block.steamcore.sealed_block": "Sealed Block",
+  "item.steamcore.emptyeternalgem": "Emptyeternalgem",
+  "gui.steamcore.eternal_infuser.label_infuser": "Infuser",
+  "item.steamcore.eternalinfuserblock": "Eternal Infuser Block"
 }

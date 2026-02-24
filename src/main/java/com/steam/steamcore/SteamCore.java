@@ -8,12 +8,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
-
-
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -22,16 +17,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -70,6 +62,9 @@ public class SteamCore {
     public static final DeferredBlock<Block> SEALED_BLOCK =
             BLOCKS.registerSimpleBlock("sealed_block",
                     BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f));
+    public static final DeferredBlock<Block> ETERNAL_INFUSER =
+            BLOCKS.registerSimpleBlock("eternal_infuser",
+                    BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f));
 
     public static final DeferredBlock<Block> ETERNAL_ORE =
             BLOCKS.registerSimpleBlock("eternal_ore",
@@ -86,7 +81,8 @@ public class SteamCore {
 
     public static final DeferredItem<BlockItem> SEALED_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("sealed_block", SEALED_BLOCK);
-
+    public static final DeferredItem<BlockItem> ETERNAL_INFUSER_ITEM =
+            ITEMS.registerSimpleBlockItem("eternal_infuser", ETERNAL_INFUSER);
     public static final DeferredItem<BlockItem> ETERNAL_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("eternal_ore", ETERNAL_ORE);
 
@@ -151,6 +147,7 @@ public class SteamCore {
                                 output.accept(GAMMA_BRICK_ITEM.get());
                                 output.accept(GAMMA_ORE_ITEM.get());
                                 output.accept(SEALED_BLOCK_ITEM.get());
+                                output.accept(ETERNAL_INFUSER_ITEM.get());
                                 output.accept(ETERNAL_ORE_ITEM.get());
 
                                 // Items
@@ -214,17 +211,16 @@ public class SteamCore {
         }
     }
 
-private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-        event.accept(SEALED_BLOCK_ITEM);
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(SEALED_BLOCK_ITEM);
+        }
     }
-}
 
-@SubscribeEvent
-public void onServerStarting(ServerStartingEvent event) {
-    // Do something when the server starts
-    LOGGER.info("HELLO from server starting");
-}
+    @SubscribeEvent
+    public void onServerStarting(ServerStartingEvent event) {
+        // Do something when the server starts
+        LOGGER.info("HELLO from server starting");
+    }
 
 }
-
