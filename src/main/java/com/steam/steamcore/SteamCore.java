@@ -1,9 +1,8 @@
 package com.steam.steamcore;
 
+import net.minecraft.server.level.ServerLevel;
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
-
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
@@ -15,6 +14,9 @@ import com.steam.steamcore.command.GenerateModListCommand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -116,6 +118,12 @@ public class SteamCore {
     public static final DeferredItem<Item> ETERNAL_CORE =
             ITEMS.registerSimpleItem("eternal_core");
 
+    public static final DeferredItem<Item> GAMMA_IGNITE =
+            ITEMS.register("gamma_ignite",
+                    () -> new com.steam.steamcore.item.GammaIgniteItem(
+                            new Item.Properties().stacksTo(1)
+                    ));
+
     public static final DeferredItem<Item> ETERNAL_GEM =
             ITEMS.registerSimpleItem("eternal_gem");
 
@@ -164,6 +172,7 @@ public class SteamCore {
                                 output.accept(EMPTY_ETERNAL_GEM.get());
                                 output.accept(ETERNAL_CORE.get());
                                 output.accept(ETERNAL_GEM.get());
+                                output.accept(GAMMA_IGNITE.get());
 
                                 // Sword parts
                                 output.accept(SWORD_PART.get());
@@ -195,24 +204,65 @@ public class SteamCore {
         PackInfoCommand.register(event.getDispatcher());
     }
 
+    private void clearArea(Level level, BlockPos center) {
+
+        for (int x = -1; x <= 1; x++) {
+            for (int z = -1; z <= 1; z++) {
+                for (int y = 0; y <= 2; y++) {
+
+                    BlockPos pos = center.offset(x, y, z);
+
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                }
+            }
+        }
+    }
+
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
 
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        if (!Config.SHOW_INTRO_MESSAGES.get()) return;
+        Level level = player.level();
+        if (level.isClientSide) return;
 
         var tag = player.getPersistentData();
 
-        if (!tag.getBoolean("steamcore_intro_shown")) {
+        // FIRST SPAWN
+        if (!tag.getBoolean("steamcore_spawned")) {
 
-            // beta message
+            int randomY = 80 + level.random.nextInt(21);
+
+            BlockPos spawnPos = new BlockPos(
+                    player.getBlockX(),
+                    randomY,
+                    player.getBlockZ()
+            );
+
+            clearArea(level, spawnPos);
+
+            player.teleportTo(
+                    (ServerLevel) level,
+                    spawnPos.getX() + 0.5,
+                    spawnPos.getY(),
+                    spawnPos.getZ() + 0.5,
+                    player.getYRot(),
+                    player.getXRot()
+            );
+
+            tag.putBoolean("steamcore_spawned", true);
+        }
+
+        // INTRO MESSAGE
+
+        if (Config.SHOW_INTRO_MESSAGES.get()
+                && !tag.getBoolean("steamcore_intro_shown")) {
+
             player.sendSystemMessage(
                     Component.literal("Welcome to SteamCore Beta!")
                             .withStyle(ChatFormatting.GOLD)
             );
 
-            // story?
             player.sendSystemMessage(
                     Component.literal("You wake up in an unfamiliar world... How did you get here?")
                             .withStyle(ChatFormatting.GRAY)
