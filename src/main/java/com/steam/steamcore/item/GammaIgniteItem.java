@@ -46,9 +46,6 @@ public class GammaIgniteItem extends Item {
         );
     }
 
-    // ===============================
-    // ПКМ использование
-    // ===============================
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
@@ -151,9 +148,7 @@ public class GammaIgniteItem extends Item {
     }
 
 
-    // ===============================
-    // Телепорт
-    // ===============================
+    // TP method
     private static void teleportToRespawn(ServerPlayer player) {
 
         MinecraftServer server = player.server;

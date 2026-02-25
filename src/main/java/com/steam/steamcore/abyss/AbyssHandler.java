@@ -31,7 +31,7 @@ public class AbyssHandler {
 
         var tag = player.getPersistentData();
 
-        // ===== Защита после входа =====
+        // Protect new joiners from instant Abyss deaths
         if (!tag.contains("steamcore_join_protection")) {
             tag.putInt("steamcore_join_protection", 40);
             return;
