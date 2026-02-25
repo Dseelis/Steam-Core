@@ -23,13 +23,21 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 @EventBusSubscriber(modid = SteamCore.MODID)
 public class AbyssHandler {
 
+    // ABYSS SYSTEM
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
 
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         if (player.level().isClientSide) return;
 
+        if (!Config.ENABLE_ABYSS.get()) return;
+
         var tag = player.getPersistentData();
+
+        int abyssCooldown = tag.getInt("steamcore_abyss_cooldown");
+        if (abyssCooldown > 0) {
+            tag.putInt("steamcore_abyss_cooldown", abyssCooldown - 1);
+        }
 
         // Protect new joiners from instant Abyss deaths
         if (!tag.contains("steamcore_join_protection")) {
@@ -38,7 +46,6 @@ public class AbyssHandler {
         }
 
         int joinCooldown = tag.getInt("steamcore_join_protection");
-
         if (joinCooldown > 0) {
             tag.putInt("steamcore_join_protection", joinCooldown - 1);
             return;
@@ -48,10 +55,8 @@ public class AbyssHandler {
         handleNetherExit(player);
     }
 
-    // ABYSS SYSTEM
     private static void handleAbyss(ServerPlayer player) {
 
-        if (!Config.ENABLE_ABYSS.get()) return;
         if (player.level().dimension() != Level.OVERWORLD) return;
         if (player.getY() >= Config.ABYSS_HEIGHT.get()) return;
 

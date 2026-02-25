@@ -5,7 +5,7 @@ license="Steamcreate2 Mod Custom License"
 [[mods]]
 modId="steamcore"
 logoFile="icon.png"
-version="1.0.5b"
+version="1.0.6b"
 description='''coremod for steamcore modpack.'''
 displayName="Steamcore"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
