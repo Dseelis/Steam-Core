@@ -148,9 +148,7 @@ public class GammaIgniteItem extends Item {
     }
 
 
-    // ===============================
-    // Телепорт
-    // ===============================
+    // TP method
     private static void teleportToRespawn(ServerPlayer player) {
 
         MinecraftServer server = player.server;
