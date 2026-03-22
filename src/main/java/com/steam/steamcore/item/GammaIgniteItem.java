@@ -171,7 +171,9 @@ public class GammaIgniteItem extends Item {
                 player.getXRot()
         );
     }
-
+    public static void cancelPendingTeleport(UUID uuid) {
+        pendingTeleports.remove(uuid);
+    }
     // Tooltip
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {

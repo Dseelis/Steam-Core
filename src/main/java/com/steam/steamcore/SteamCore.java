@@ -272,6 +272,13 @@ public class SteamCore {
         }
     }
 
+    @SubscribeEvent
+    public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+
+        com.steam.steamcore.item.GammaIgniteItem.cancelPendingTeleport(player.getUUID());
+    }
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(SEALED_BLOCK_ITEM);
