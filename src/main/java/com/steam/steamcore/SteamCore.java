@@ -1,6 +1,10 @@
 package com.steam.steamcore;
 
+import com.steam.steamcore.block.EternalInfuserBlock;
+import com.steam.steamcore.block.EternalInfuserBlockEntity;
+import com.steam.steamcore.block.EternalInfuserCapabilities;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -9,8 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import com.steam.steamcore.command.PackInfoCommand;
-import com.steam.steamcore.command.GenerateModListCommand;
+import com.steam.steamcore.command.DebugCommand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -55,6 +58,9 @@ public class SteamCore {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES =
+            DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
+
 
     // BLOCKS
 
@@ -69,13 +75,29 @@ public class SteamCore {
     public static final DeferredBlock<Block> SEALED_BLOCK =
             BLOCKS.registerSimpleBlock("sealed_block",
                     BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f));
-    public static final DeferredBlock<Block> ETERNAL_INFUSER =
-            BLOCKS.registerSimpleBlock("eternal_infuser",
-                    BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f));
+
+    public static final DeferredBlock<EternalInfuserBlock> ETERNAL_INFUSER =
+            BLOCKS.register("eternal_infuser",
+                    () -> new EternalInfuserBlock(
+                            BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.METAL)
+                                    .strength(4f)
+                    ));
 
     public static final DeferredBlock<Block> ETERNAL_ORE =
             BLOCKS.registerSimpleBlock("eternal_ore",
                     BlockBehaviour.Properties.of().mapColor(MapColor.STONE).strength(4f));
+
+
+    // BLOCK ENTITY TYPES
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EternalInfuserBlockEntity>>
+            ETERNAL_INFUSER_BE_TYPE = BLOCK_ENTITY_TYPES.register(
+            "eternal_infuser",
+            () -> BlockEntityType.Builder
+                    .of(EternalInfuserBlockEntity::new, ETERNAL_INFUSER.get())
+                    .build(null)
+    );
 
 
     // BLOCK ITEMS
@@ -88,8 +110,10 @@ public class SteamCore {
 
     public static final DeferredItem<BlockItem> SEALED_BLOCK_ITEM =
             ITEMS.registerSimpleBlockItem("sealed_block", SEALED_BLOCK);
+
     public static final DeferredItem<BlockItem> ETERNAL_INFUSER_ITEM =
             ITEMS.registerSimpleBlockItem("eternal_infuser", ETERNAL_INFUSER);
+
     public static final DeferredItem<BlockItem> ETERNAL_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("eternal_ore", ETERNAL_ORE);
 
@@ -125,7 +149,10 @@ public class SteamCore {
                     ));
 
     public static final DeferredItem<Item> ETERNAL_GEM =
-            ITEMS.registerSimpleItem("eternal_gem");
+            ITEMS.register("eternal_gem",
+                    () -> new com.steam.steamcore.item.EternalGemItem(
+                            new Item.Properties().stacksTo(1)
+                    ));
 
     public static final DeferredItem<Item> SWORD_PART =
             ITEMS.registerSimpleItem("sword_part");
@@ -140,8 +167,8 @@ public class SteamCore {
                             new Item.Properties()
                                     .attributes(SwordItem.createAttributes(
                                             Tiers.DIAMOND,
-                                            5,      // damage
-                                            -2.4F   // attack speed
+                                            5,
+                                            -2.4F
                                     ))
                                     .stacksTo(1)
                     ));
@@ -156,14 +183,12 @@ public class SteamCore {
                             .icon(() -> new ItemStack(ETERNAL_CORE.get()))
                             .displayItems((parameters, output) -> {
 
-                                // Blocks
                                 output.accept(GAMMA_BRICK_ITEM.get());
                                 output.accept(GAMMA_ORE_ITEM.get());
                                 output.accept(SEALED_BLOCK_ITEM.get());
                                 output.accept(ETERNAL_INFUSER_ITEM.get());
                                 output.accept(ETERNAL_ORE_ITEM.get());
 
-                                // Items
                                 output.accept(UNFINISHED_CALCULATION_PRESS.get());
                                 output.accept(UNFINISHED_ENGINEERING_PRESS.get());
                                 output.accept(UNFINISHED_LOGIC_PRESS.get());
@@ -174,7 +199,6 @@ public class SteamCore {
                                 output.accept(ETERNAL_GEM.get());
                                 output.accept(GAMMA_IGNITE.get());
 
-                                // Sword parts
                                 output.accept(SWORD_PART.get());
                                 output.accept(SWORD_PART_2.get());
                                 output.accept(FINAL_SWORD.get());
@@ -190,28 +214,26 @@ public class SteamCore {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+        BLOCK_ENTITY_TYPES.register(modEventBus);
+
+        modEventBus.addListener(EternalInfuserCapabilities::register);
+        modEventBus.addListener(this::addCreative);
 
         NeoForge.EVENT_BUS.register(this);
-
-        modEventBus.addListener(this::addCreative);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     @SubscribeEvent
     public void onRegisterCommands(RegisterCommandsEvent event) {
-        GenerateModListCommand.register(event.getDispatcher());
-        PackInfoCommand.register(event.getDispatcher());
+        DebugCommand.register(event.getDispatcher());
     }
 
     private void clearArea(Level level, BlockPos center) {
-
         for (int x = -1; x <= 1; x++) {
             for (int z = -1; z <= 1; z++) {
                 for (int y = 0; y <= 2; y++) {
-
                     BlockPos pos = center.offset(x, y, z);
-
                     level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                 }
             }
@@ -228,7 +250,6 @@ public class SteamCore {
 
         var tag = player.getPersistentData();
 
-        // FIRST SPAWN
         if (!tag.getBoolean("steamcore_spawned")) {
 
             int randomY = 80 + level.random.nextInt(21);
@@ -253,8 +274,6 @@ public class SteamCore {
             tag.putBoolean("steamcore_spawned", true);
         }
 
-        // INTRO MESSAGE
-
         if (Config.SHOW_INTRO_MESSAGES.get()
                 && !tag.getBoolean("steamcore_intro_shown")) {
 
@@ -274,11 +293,10 @@ public class SteamCore {
 
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
-
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
-
         com.steam.steamcore.item.GammaIgniteItem.cancelPendingTeleport(player.getUUID());
     }
+
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(SEALED_BLOCK_ITEM);
@@ -287,8 +305,6 @@ public class SteamCore {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
-
 }

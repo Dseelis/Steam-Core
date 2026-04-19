@@ -15,8 +15,7 @@ public class Config {
     public static final ModConfigSpec.BooleanValue ENABLE_GAMMA_IGNITE;
 
     // DEBUG
-    public static final ModConfigSpec.BooleanValue ENABLE_MODLIST_COMMAND;
-    public static final ModConfigSpec.BooleanValue ENABLE_PACKINFO_COMMAND;
+    public static final ModConfigSpec.BooleanValue ENABLE_STEAMDEBUG_COMMAND;
 
     static {
 
@@ -53,13 +52,9 @@ public class Config {
         // DEBUG
         BUILDER.push("debug");
 
-        ENABLE_MODLIST_COMMAND = BUILDER
-                .comment("Enable /generatemodlist command")
-                .define("enableModlistCommand", false);
-
-        ENABLE_PACKINFO_COMMAND = BUILDER
-                .comment("Enable /packinfo command")
-                .define("enablePackinfoCommand", false);
+        ENABLE_STEAMDEBUG_COMMAND = BUILDER
+                .comment("Enable /steamdebug")
+                .define("enableSteamDebugCommand", false);
 
         BUILDER.pop();
     }

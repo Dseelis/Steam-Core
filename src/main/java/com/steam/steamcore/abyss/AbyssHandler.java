@@ -117,7 +117,7 @@ public class AbyssHandler {
     private static void handleNetherExit(ServerPlayer player) {
 
         if (player.level().dimension() != Level.NETHER) return;
-        if (player.getBlockY() < 123) return;
+        if (player.getBlockY() < AbyssConstants.NETHER_ROOF_EXIT_Y) return;
         if (player.getPersistentData().getInt("steamcore_abyss_cooldown") > 0) {
             return;
         }
