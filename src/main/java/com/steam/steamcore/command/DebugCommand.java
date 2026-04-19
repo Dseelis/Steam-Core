@@ -1,10 +1,10 @@
 package com.steam.steamcore.command;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.steam.steamcore.Config;
 import com.steam.steamcore.SteamCore;
 import com.steam.steamcore.block.EternalInfuserBlockEntity;
 import com.steam.steamcore.utils.PlayerDataKeys;
@@ -41,7 +41,8 @@ public class DebugCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 Commands.literal("steamdebug")
-                        .requires(src -> src.hasPermission(2))
+                        .requires(src -> src.hasPermission(2)
+                                && Config.ENABLE_STEAMDEBUG_COMMAND.get())
 
                         .then(Commands.literal("info")
                                 .then(Commands.argument("target", EntityArgument.player())
@@ -105,7 +106,6 @@ public class DebugCommand {
         }
     }
 
-    // setenergy — Searches for an Eternal Infuser within a 5-block radius of the player
 
     private static int setEnergy(CommandContext<CommandSourceStack> ctx) {
         CommandSourceStack source = ctx.getSource();
