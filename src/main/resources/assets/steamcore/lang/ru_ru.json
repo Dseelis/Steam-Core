@@ -10,14 +10,14 @@
   "item.steamcore.sword_part": "Часть меча",
   "item.steamcore.sword_part_2": "Часть меча",
   "item.steamcore.final_sword": "Омега Клинок",
-  "item.steamcore.gamma_ignite": "Gamma Ignite (WIP)",
+  "item.steamcore.gamma_ignite": "Gamma Ignite",
   "item.steamcore.unfinished_engineering_press": "Незавершенный инженерный пресс",
   "item.steamcore.unfinished_silicon_press": "Незавершенный кремниевый пресс",
   "item.steamcore.unfinished_logic_press": "Незавершенный логический пресс",
   "item.steamcore.unfinished_calculation_press": "Незавершенный вычислительный пресс",
   "block.steamcore.sealed_block": "Герметичный блок",
   "item.steamcore.emptyeternalgem": "Пустая вечная драгоценность",
-  "gui.steamcore.eternal_infuser.label_infuser": "Eternal Infuser",
+  "gui.steamcore.eternal_infuser.label_infuser": "Infuser",
   "block.steamcore.eternal_infuser": "Eternal Infuser",
   "steamcore.configuration.general": "General",
   "steamcore.configuration.debug": "Debug functions",
@@ -28,5 +28,4 @@
   "steamcore.configuration.abyssHeight": "Abyss Height (WIP)",
   "steamcore.configuration.abyssDamage": "Abyss Damage (WIP)",
   "steamcore.configuration.enablePortals": "Enable Vanilla Portals"
-}
 }
