@@ -33,7 +33,7 @@ public class EternalInfuserBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    // ---------- BlockEntity ----------
+    // BlockEntity
 
     @Nullable
     @Override
@@ -43,11 +43,9 @@ public class EternalInfuserBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-        // Стандартный куб — рендерится через модель, как обычный блок
+
         return RenderShape.MODEL;
     }
-
-    // ---------- Клик по блоку ----------
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level,
@@ -62,7 +60,6 @@ public class EternalInfuserBlock extends BaseEntityBlock {
 
         ItemStack held = player.getMainHandItem();
 
-        // Рука пустая — показать запас энергии
         if (held.isEmpty()) {
             int stored = infuser.getEnergyStored();
             int max    = infuser.getMaxEnergyStored();
@@ -75,7 +72,6 @@ public class EternalInfuserBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
 
-        // В руке empty_eternal_gem — попытка зарядки
         if (held.is(SteamCore.EMPTY_ETERNAL_GEM.get())) {
             return infuser.tryCharge(player, held, level, pos);
         }

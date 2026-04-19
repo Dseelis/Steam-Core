@@ -25,7 +25,7 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
 
     private int energy = 0;
 
-    // ---------- constructor ----------
+    // constructor
 
     public EternalInfuserBlockEntity(BlockPos pos, BlockState state) {
         super(SteamCore.ETERNAL_INFUSER_BE_TYPE.get(), pos, state);
@@ -54,7 +54,7 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
             player.drop(result, false);
         }
 
-        // Звук
+        // sound
         level.playSound(
                 null,
                 pos,
@@ -75,8 +75,7 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
         return InteractionResult.SUCCESS;
     }
 
-    // ---------- Debug ----------
-
+    // Debug
     public void setEnergy(int amount) {
         this.energy = Math.max(0, Math.min(amount, MAX_ENERGY));
         setChanged();
@@ -97,7 +96,7 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
-        // Инфьюзер не отдаёт энергию наружу
+
         return 0;
     }
 

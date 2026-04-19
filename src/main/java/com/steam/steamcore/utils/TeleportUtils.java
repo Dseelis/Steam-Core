@@ -1,4 +1,4 @@
-package com.steam.steamcore.util;
+package com.steam.steamcore.utils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
@@ -8,10 +8,9 @@ import net.minecraft.world.level.Level;
 
 public class TeleportUtils {
 
-    /**
-     * Teleports the player to their bed/anchor respawn point,
-     * or to the world spawn if no respawn is set.
-     */
+// Teleports the player to their bed/anchor respawn point,
+// or to the world spawn if no respawn is set.
+
     public static void teleportToRespawn(ServerPlayer player) {
         MinecraftServer server = player.server;
         ServerLevel overworld = server.getLevel(Level.OVERWORLD);
@@ -29,9 +28,8 @@ public class TeleportUtils {
         );
     }
 
-    /**
-     * Teleports the player to a specific dimension and position.
-     */
+// Teleports the player to a specific dimension and position.
+
     public static void teleportTo(ServerPlayer player, ServerLevel level, BlockPos pos) {
         player.teleportTo(
                 level,
@@ -43,19 +41,17 @@ public class TeleportUtils {
         );
     }
 
-    /**
-     * Resolves the best respawn position for a player:
-     * bed/anchor → world spawn.
-     */
+// Resolves the best respawn position for a player:
+// bed/anchor → world spawn.
+
     public static BlockPos resolveRespawnPos(ServerPlayer player, ServerLevel overworld) {
         BlockPos respawnPos = player.getRespawnPosition();
         return (respawnPos != null) ? respawnPos : overworld.getSharedSpawnPos();
     }
 
-    /**
-     * Finds a safe standing position in a level by scanning downward from maxY.
-     * Returns null if nothing found.
-     */
+// Finds a safe standing position in a level by scanning downward from maxY.
+// Returns null if nothing found.
+
     public static BlockPos findSafePosition(ServerLevel level, int x, int z, int maxY) {
         int clampedMaxY = Math.min(maxY, level.getMaxBuildHeight() - 2);
 

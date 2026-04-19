@@ -182,13 +182,13 @@ public class SteamCore {
                             .title(Component.translatable("itemGroup.steamcore"))
                             .icon(() -> new ItemStack(ETERNAL_CORE.get()))
                             .displayItems((parameters, output) -> {
-
+                                // Blocks
                                 output.accept(GAMMA_BRICK_ITEM.get());
                                 output.accept(GAMMA_ORE_ITEM.get());
                                 output.accept(SEALED_BLOCK_ITEM.get());
                                 output.accept(ETERNAL_INFUSER_ITEM.get());
                                 output.accept(ETERNAL_ORE_ITEM.get());
-
+                                // Items
                                 output.accept(UNFINISHED_CALCULATION_PRESS.get());
                                 output.accept(UNFINISHED_ENGINEERING_PRESS.get());
                                 output.accept(UNFINISHED_LOGIC_PRESS.get());
@@ -198,7 +198,7 @@ public class SteamCore {
                                 output.accept(ETERNAL_CORE.get());
                                 output.accept(ETERNAL_GEM.get());
                                 output.accept(GAMMA_IGNITE.get());
-
+                                // Sword parts
                                 output.accept(SWORD_PART.get());
                                 output.accept(SWORD_PART_2.get());
                                 output.accept(FINAL_SWORD.get());
