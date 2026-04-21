@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "steamcore:block/infuser1",
+    "up": "steamcore:block/infuser1",
+    "north": "steamcore:block/infuser1",
+    "east": "steamcore:block/infuser1",
+    "south": "steamcore:block/infuser2",
+    "west": "steamcore:block/infuser1",
+    "particle": "steamcore:block/infuser1"
+  },
+  "render_type": "solid"
+}

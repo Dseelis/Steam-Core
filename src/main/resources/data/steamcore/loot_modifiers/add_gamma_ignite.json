@@ -1,0 +1,19 @@
+{
+  "type": "neoforge:add_items",
+  "conditions": [
+    {
+      "condition": "minecraft:location_check",
+      "predicate": {
+        "structure": "minecraft:nether_fortress"
+      }
+    }
+  ],
+  "items": [
+    {
+      "name": "steamcore:gamma_ignite",
+      "weight": 3
+    }
+  ]
+}
+
+// not work...

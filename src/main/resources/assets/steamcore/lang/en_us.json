@@ -10,9 +10,22 @@
   "item.steamcore.sword_part": "Sword Part",
   "item.steamcore.sword_part_2": "Sword Part 2",
   "item.steamcore.final_sword": "Final Sword",
+  "item.steamcore.gamma_ignite": "Gamma Ignite",
   "item.steamcore.unfinished_engineering_press": "Unfinished Engineering Press",
   "item.steamcore.unfinished_silicon_press": "Unfinished Silicon Press",
   "item.steamcore.unfinished_logic_press": "Unfinished Logic Press",
   "item.steamcore.unfinished_calculation_press": "Unfinished Calculation Press",
-  "block.steamcore.sealed_block": "Sealed Block"
+  "block.steamcore.sealed_block": "Sealed Block",
+  "item.steamcore.emptyeternalgem": "Empty eternal gem",
+  "gui.steamcore.eternal_infuser.label_infuser": "Infuser",
+  "block.steamcore.eternal_infuser": "Eternal Infuser Block",
+  "steamcore.configuration.general": "General",
+  "steamcore.configuration.debug": "Debug functions",
+  "steamcore.configuration.showIntroMessages": "Show Intro Message",
+  "steamcore.configuration.enableSteamDebugCommand": "/steamdebug command",
+  "steamcore.configuration.enableAbyss": "Enable Abyss (WIP)",
+  "steamcore.configuration.enableGammaIgnite": "Enable Gamma Ignite (WIP)",
+  "steamcore.configuration.abyssHeight": "Abyss Height (WIP)",
+  "steamcore.configuration.abyssDamage": "Abyss Damage (WIP)",
+  "steamcore.configuration.enablePortals": "Enable Vanilla Portals"
 }

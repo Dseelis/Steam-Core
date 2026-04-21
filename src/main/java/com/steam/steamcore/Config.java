@@ -1,27 +1,63 @@
 package com.steam.steamcore;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config {
+
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
-    public static final ModConfigSpec.BooleanValue SHOW_INTRO_MESSAGES = BUILDER
-            .comment("Show intro messages when entering the world for the first time")
-            .define("showIntroMessages", false);
+
+    // GENERAL
+    public static final ModConfigSpec.BooleanValue SHOW_INTRO_MESSAGES;
+    public static final ModConfigSpec.BooleanValue ENABLE_ABYSS;
+    public static final ModConfigSpec.IntValue ABYSS_HEIGHT;
+    public static final ModConfigSpec.IntValue ABYSS_DAMAGE;
+    public static final ModConfigSpec.BooleanValue ENABLE_PORTALS;
+    public static final ModConfigSpec.BooleanValue ENABLE_GAMMA_IGNITE;
+
+    // DEBUG
+    public static final ModConfigSpec.BooleanValue ENABLE_STEAMDEBUG_COMMAND;
+
+    static {
+
+        // GENERAL
+        BUILDER.push("general");
+
+        SHOW_INTRO_MESSAGES = BUILDER
+                .comment("Show intro messages when entering the world")
+                .define("showIntroMessages", false);
+
+        ENABLE_ABYSS = BUILDER
+                .comment("Enable abyss teleport system")
+                .define("enableAbyss", false);
+
+        ENABLE_GAMMA_IGNITE = BUILDER
+                .comment("Enable Gamma Ignite item usage")
+                .define("enableGammaIgnite", true);
+
+        ABYSS_HEIGHT = BUILDER
+                .comment("Y level where teleport triggers")
+                .defineInRange("abyssHeight", -62, -256, 0);
+
+        ABYSS_DAMAGE = BUILDER
+                .comment("Damage dealt before teleport")
+                .defineInRange("abyssDamage", 4, 0, 40);
+
+        ENABLE_PORTALS = BUILDER
+                .comment("Allow Nether portals")
+                .define("enablePortals", true);
+
+        BUILDER.pop();
 
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+        // DEBUG
+        BUILDER.push("debug");
 
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
+        ENABLE_STEAMDEBUG_COMMAND = BUILDER
+                .comment("Enable /steamdebug")
+                .define("enableSteamDebugCommand", false);
+
+        BUILDER.pop();
     }
+
+    public static final ModConfigSpec SPEC = BUILDER.build();
 }
