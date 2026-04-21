@@ -32,7 +32,7 @@ public class Config {
 
         ENABLE_GAMMA_IGNITE = BUILDER
                 .comment("Enable Gamma Ignite item usage")
-                .define("enableGammaIgnite", false);
+                .define("enableGammaIgnite", true);
 
         ABYSS_HEIGHT = BUILDER
                 .comment("Y level where teleport triggers")
