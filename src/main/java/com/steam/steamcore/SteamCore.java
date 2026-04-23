@@ -3,6 +3,7 @@ package com.steam.steamcore;
 import com.steam.steamcore.block.EternalInfuserBlock;
 import com.steam.steamcore.block.EternalInfuserBlockEntity;
 import com.steam.steamcore.block.EternalInfuserCapabilities;
+import com.steam.steamcore.utils.TeleportUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import org.slf4j.Logger;
@@ -17,9 +18,6 @@ import com.steam.steamcore.command.DebugCommand;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -39,6 +37,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.core.BlockPos;
 
 @Mod(SteamCore.MODID)
 public class SteamCore {
@@ -182,13 +181,11 @@ public class SteamCore {
                             .title(Component.translatable("itemGroup.steamcore"))
                             .icon(() -> new ItemStack(ETERNAL_CORE.get()))
                             .displayItems((parameters, output) -> {
-                                // Blocks
                                 output.accept(GAMMA_BRICK_ITEM.get());
                                 output.accept(GAMMA_ORE_ITEM.get());
                                 output.accept(SEALED_BLOCK_ITEM.get());
                                 output.accept(ETERNAL_INFUSER_ITEM.get());
                                 output.accept(ETERNAL_ORE_ITEM.get());
-                                // Items
                                 output.accept(UNFINISHED_CALCULATION_PRESS.get());
                                 output.accept(UNFINISHED_ENGINEERING_PRESS.get());
                                 output.accept(UNFINISHED_LOGIC_PRESS.get());
@@ -198,7 +195,6 @@ public class SteamCore {
                                 output.accept(ETERNAL_CORE.get());
                                 output.accept(ETERNAL_GEM.get());
                                 output.accept(GAMMA_IGNITE.get());
-                                // Sword parts
                                 output.accept(SWORD_PART.get());
                                 output.accept(SWORD_PART_2.get());
                                 output.accept(FINAL_SWORD.get());
@@ -229,44 +225,36 @@ public class SteamCore {
         DebugCommand.register(event.getDispatcher());
     }
 
-    private void clearArea(Level level, BlockPos center) {
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                for (int y = 0; y <= 2; y++) {
-                    BlockPos pos = center.offset(x, y, z);
-                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                }
-            }
-        }
-    }
-
     @SubscribeEvent
     public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
 
-        Level level = player.level();
-        if (level.isClientSide) return;
+        // getServer() is safe here — PlayerLoggedInEvent fires server-side only
+        ServerLevel overworld = player.getServer().getLevel(net.minecraft.world.level.Level.OVERWORLD);
+        if (overworld == null) return;
 
         var tag = player.getPersistentData();
 
         if (!tag.getBoolean("steamcore_spawned")) {
+            // Find a safe surface position near world spawn.
+            // We search from just below the build height down to ground level.
+            BlockPos spawn = overworld.getSharedSpawnPos();
+            int searchStartY = Math.min(overworld.getMaxBuildHeight() - 2, 200);
 
-            int randomY = 80 + level.random.nextInt(21);
+            BlockPos safePos = TeleportUtils.findSafePosition(
+                    overworld, spawn.getX(), spawn.getZ(), searchStartY);
 
-            BlockPos spawnPos = new BlockPos(
-                    player.getBlockX(),
-                    randomY,
-                    player.getBlockZ()
-            );
-
-            clearArea(level, spawnPos);
+            // Fallback: use the world spawn directly if scan found nothing
+            // (e.g. superflat worlds). findSafePosition already clamped to bounds.
+            if (safePos == null) {
+                safePos = overworld.getSharedSpawnPos().above();
+            }
 
             player.teleportTo(
-                    (ServerLevel) level,
-                    spawnPos.getX() + 0.5,
-                    spawnPos.getY(),
-                    spawnPos.getZ() + 0.5,
+                    overworld,
+                    safePos.getX() + 0.5,
+                    safePos.getY(),
+                    safePos.getZ() + 0.5,
                     player.getYRot(),
                     player.getXRot()
             );
@@ -281,7 +269,6 @@ public class SteamCore {
                     Component.literal("Welcome to SteamCore Beta!")
                             .withStyle(ChatFormatting.GOLD)
             );
-
             player.sendSystemMessage(
                     Component.literal("You wake up in an unfamiliar world... How did you get here?")
                             .withStyle(ChatFormatting.GRAY)
