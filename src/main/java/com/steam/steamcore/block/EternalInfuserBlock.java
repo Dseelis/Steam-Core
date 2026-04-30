@@ -1,11 +1,9 @@
 package com.steam.steamcore.block;
 
-import com.steam.steamcore.SteamCore;
+import com.steam.steamcore.registry.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -33,8 +31,6 @@ public class EternalInfuserBlock extends BaseEntityBlock {
         return CODEC;
     }
 
-    // BlockEntity
-
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -43,7 +39,6 @@ public class EternalInfuserBlock extends BaseEntityBlock {
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
-
         return RenderShape.MODEL;
     }
 
@@ -72,7 +67,7 @@ public class EternalInfuserBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
 
-        if (held.is(SteamCore.EMPTY_ETERNAL_GEM.get())) {
+        if (held.is(ModItems.EMPTY_ETERNAL_GEM.get())) {
             return infuser.tryCharge(player, held, level, pos);
         }
 

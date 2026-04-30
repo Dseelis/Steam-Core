@@ -1,3 +1,13 @@
+# [steamcore-1.1.2b-neoforge-1.21.1] - 30.04.2026
+restructured for convenience (probably)
+deleted stone instrument craft fix
+
+# [steamcore-1.1.1b-neoforge-1.21.1] - 23.04.2026
+teleport fix
+
+// for modpack
+(temp) stone instrument craft fix
+
 # [steamcore-1.1.0b-neoforge-1.21.1] - 21.04.2026
 abyss system wip (default off)
 debug command rework
