@@ -45,7 +45,7 @@ public class SteamCore {
     public static final String MODID = "steamcore";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String PACK_NAME = "SteamCreate 2";
-    public static final String PACK_VERSION = "2.1.0b";
+    public static final String PACK_VERSION = "2.1.1b";
 
     // REGISTRIES
     public static final DeferredRegister.Blocks BLOCKS =
