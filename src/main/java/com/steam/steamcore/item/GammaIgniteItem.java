@@ -115,10 +115,8 @@ public class GammaIgniteItem extends Item {
         if (next <= 0) {
             pendingTeleports.remove(id);
 
-            // Teleport via TeleportUtils so the destination is always safe
             TeleportUtils.teleportToRespawn(player);
 
-            // Consume one charge from the item currently in main hand.
             // Guard: only consume if it really is a GammaIgniteItem to avoid
             // breaking whatever the player may have swapped to during the delay.
             ItemStack stack = player.getMainHandItem();
@@ -131,7 +129,6 @@ public class GammaIgniteItem extends Item {
         }
     }
 
-    // Called from SteamCore.onPlayerLogout — clears the pending entry so
     // a disconnected player doesn't teleport on reconnect.
     public static void cancelPendingTeleport(UUID uuid) {
         pendingTeleports.remove(uuid);

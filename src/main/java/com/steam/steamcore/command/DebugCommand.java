@@ -65,8 +65,6 @@ public class DebugCommand {
         );
     }
 
-    // info
-
     private static int printInfo(CommandContext<CommandSourceStack> ctx) {
         try {
             ServerPlayer target = EntityArgument.getPlayer(ctx, "target");
@@ -88,8 +86,6 @@ public class DebugCommand {
         }
     }
 
-    // abysstp
-
     private static int forceAbyssTp(CommandContext<CommandSourceStack> ctx) {
         try {
             ServerPlayer target = EntityArgument.getPlayer(ctx, "target");
@@ -105,7 +101,6 @@ public class DebugCommand {
             return 0;
         }
     }
-
 
     private static int setEnergy(CommandContext<CommandSourceStack> ctx) {
         CommandSourceStack source = ctx.getSource();
@@ -166,8 +161,6 @@ public class DebugCommand {
         return 1;
     }
 
-    // packinfo
-
     private static int generatePackInfo(CommandContext<CommandSourceStack> ctx) {
         Path dir = steamcoreConfigDir();
         ensureDir(dir);
@@ -204,8 +197,6 @@ public class DebugCommand {
         return 1;
     }
 
-    // modlist
-
     private static int generateModList(CommandContext<CommandSourceStack> ctx) {
         Path dir = steamcoreConfigDir();
         ensureDir(dir);
@@ -239,8 +230,6 @@ public class DebugCommand {
                         .withStyle(ChatFormatting.GREEN), true);
         return 1;
     }
-
-    // utility
 
     private static void sendField(CommandContext<CommandSourceStack> ctx,
                                   String key, String value) {

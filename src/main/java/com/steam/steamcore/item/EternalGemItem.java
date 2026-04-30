@@ -1,8 +1,5 @@
 package com.steam.steamcore.item;
 
-import com.steam.steamcore.SteamCore;
-import com.steam.steamcore.Config;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -27,7 +24,7 @@ public class EternalGemItem extends Item {
     private static final int MAX_CHARGES    = 5;
     private static final int COOLDOWN_TICKS = 600; // 30 seconds
     private static final int REGEN_DURATION = 200; // 10 seconds
-    private static final int RESIST_DURATION= 200;
+    private static final int RESIST_DURATION = 200;
 
     public EternalGemItem(Properties properties) {
         super(properties
@@ -47,11 +44,9 @@ public class EternalGemItem extends Item {
             return InteractionResultHolder.fail(stack);
         }
 
-        // Apply effects
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.REGENERATION, REGEN_DURATION, 1));
         serverPlayer.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, RESIST_DURATION, 0));
 
-        // Sound
         serverPlayer.level().playSound(
                 null,
                 serverPlayer.blockPosition(),
@@ -60,7 +55,6 @@ public class EternalGemItem extends Item {
                 0.8f, 1.4f
         );
 
-        // Particles
         if (serverPlayer.level() instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(
                     ParticleTypes.END_ROD,
@@ -76,7 +70,6 @@ public class EternalGemItem extends Item {
                         .withStyle(ChatFormatting.LIGHT_PURPLE)
         );
 
-        // Consume charge
         stack.hurtAndBreak(1, serverPlayer,
                 hand == InteractionHand.MAIN_HAND
                         ? net.minecraft.world.entity.EquipmentSlot.MAINHAND

@@ -1,6 +1,7 @@
 package com.steam.steamcore.block;
 
-import com.steam.steamcore.SteamCore;
+import com.steam.steamcore.registry.ModBlockEntities;
+import com.steam.steamcore.registry.ModItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -18,17 +19,14 @@ import net.neoforged.neoforge.energy.IEnergyStorage;
 
 public class EternalInfuserBlockEntity extends BlockEntity implements IEnergyStorage {
 
-    public static final int FE_COST    = 1_000;
-    public static final int MAX_ENERGY = 10_000;
+    public static final int FE_COST     = 1_000;
+    public static final int MAX_ENERGY  = 10_000;
     public static final int MAX_RECEIVE = 1_000;
-
 
     private int energy = 0;
 
-    // constructor
-
     public EternalInfuserBlockEntity(BlockPos pos, BlockState state) {
-        super(SteamCore.ETERNAL_INFUSER_BE_TYPE.get(), pos, state);
+        super(ModBlockEntities.ETERNAL_INFUSER_BE_TYPE.get(), pos, state);
     }
 
     public InteractionResult tryCharge(Player player, ItemStack held,
@@ -49,12 +47,11 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
 
         held.shrink(1);
 
-        ItemStack result = new ItemStack(SteamCore.ETERNAL_GEM.get());
+        ItemStack result = new ItemStack(ModItems.ETERNAL_GEM.get());
         if (!player.getInventory().add(result)) {
             player.drop(result, false);
         }
 
-        // sound
         level.playSound(
                 null,
                 pos,
@@ -81,11 +78,9 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
         setChanged();
     }
 
-
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
         if (maxReceive <= 0) return 0;
-
         int accepted = Math.min(maxReceive, Math.min(MAX_RECEIVE, MAX_ENERGY - energy));
         if (!simulate) {
             energy += accepted;
@@ -94,32 +89,11 @@ public class EternalInfuserBlockEntity extends BlockEntity implements IEnergySto
         return accepted;
     }
 
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate) {
-
-        return 0;
-    }
-
-    @Override
-    public int getEnergyStored() {
-        return energy;
-    }
-
-    @Override
-    public int getMaxEnergyStored() {
-        return MAX_ENERGY;
-    }
-
-    @Override
-    public boolean canExtract() {
-        return false;
-    }
-
-    @Override
-    public boolean canReceive() {
-        return true;
-    }
-
+    @Override public int extractEnergy(int maxExtract, boolean simulate) { return 0; }
+    @Override public int getEnergyStored()    { return energy; }
+    @Override public int getMaxEnergyStored() { return MAX_ENERGY; }
+    @Override public boolean canExtract()     { return false; }
+    @Override public boolean canReceive()     { return true; }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
