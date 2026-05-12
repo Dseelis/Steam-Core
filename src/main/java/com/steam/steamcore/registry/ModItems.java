@@ -30,6 +30,12 @@ public class ModItems {
     public static final DeferredItem<BlockItem> ETERNAL_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("eternal_ore", ModBlocks.ETERNAL_ORE);
 
+    public static final DeferredItem<BlockItem> DISASSEMBLY_TABLE_ITEM =
+            ITEMS.registerSimpleBlockItem("disassembly_table", ModBlocks.DISASSEMBLY_TABLE);
+
+    public static final DeferredItem<BlockItem> KINETIC_GENERATOR_ITEM =
+            ITEMS.registerSimpleBlockItem("kinetic_generator", ModBlocks.KINETIC_GENERATOR);
+
     // Items
 
     public static final DeferredItem<Item> UNFINISHED_CALCULATION_PRESS =
