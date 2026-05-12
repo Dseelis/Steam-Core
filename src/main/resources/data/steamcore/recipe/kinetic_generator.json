@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "pattern": [
-    "WWW",
     "IWI",
-    "R R"
+    "III",
+    "IRI"
   ],
   "key": {
     "W": {
-      "tag": "minecraft:planks"
+      "item": "create:shaft"
     },
     "I": {
-      "tag": "c:ingots/iron"
+      "item": "create:brass_ingot"
     },
     "R": {
       "item": "steamcore:wrench"
@@ -18,6 +19,6 @@
   },
   "result": {
     "count": 1,
-    "item": "steamcore:disassembly_table"
+    "id": "steamcore:kinetic_generator"
   }
 }

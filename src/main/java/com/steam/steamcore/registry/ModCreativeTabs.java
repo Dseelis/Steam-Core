@@ -37,6 +37,8 @@ public class ModCreativeTabs {
                                 output.accept(ModItems.GAMMA_IGNITE.get());
                                 output.accept(ModItems.SWORD_PART.get());
                                 output.accept(ModItems.SWORD_PART_2.get());
+                                output.accept(ModItems.DISASSEMBLY_TABLE_ITEM.get());
+                                output.accept(ModItems.KINETIC_GENERATOR_ITEM.get());
                                 output.accept(ModItems.FINAL_SWORD.get());
                             })
                             .build()

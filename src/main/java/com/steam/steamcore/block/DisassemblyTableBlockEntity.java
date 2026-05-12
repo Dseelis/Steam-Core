@@ -1,8 +1,8 @@
 package com.steam.steamcore.block;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.jetbrains.annotations.Nullable;
+
 
 import java.util.Optional;
 
@@ -45,8 +45,10 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
                 
                 ItemStack component = ingredient.getItems()[0].copy();
                 
-                // 80% chance to recover each item (configurable or random)
-                if (level.random.nextFloat() < 0.8f) {
+                // chance to recover each item (configurable or random)
+                float failChance = Config.DISASSEMBLY_FAIL_CHANCE.get().floatValue();
+
+                if (level.random.nextFloat() > failChance) {
                     addOutput(component);
                 }
             }

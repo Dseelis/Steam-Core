@@ -23,9 +23,12 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
     @Override
     public void tick() {
         super.tick();
-        if (level == null || level.isClientSide) return;
+
+        if (level == null || level.isClientSide)
+            return;
 
         float speed = Math.abs(getSpeed());
+
         if (speed > 0) {
             int generated = (int) (speed * CONVERSION_RATE);
             energyStorage.addEnergyInternal(generated);
@@ -33,13 +36,22 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
 
         if (energyStorage.getEnergyStored() > 0) {
             for (Direction direction : Direction.values()) {
+
                 BlockPos neighborPos = worldPosition.relative(direction);
+
                 IEnergyStorage neighborEnergy = level.getCapability(
-                        Capabilities.EnergyStorage.BLOCK, neighborPos, direction.getOpposite());
+                        Capabilities.EnergyStorage.BLOCK,
+                        neighborPos,
+                        direction.getOpposite()
+                );
 
                 if (neighborEnergy != null && neighborEnergy.canReceive()) {
+
                     int sent = neighborEnergy.receiveEnergy(
-                            Math.min(energyStorage.getEnergyStored(), 500), false);
+                            Math.min(energyStorage.getEnergyStored(), 500),
+                            false
+                    );
+
                     energyStorage.extractEnergyInternal(sent);
                 }
             }
@@ -59,7 +71,9 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
     }
 
     private static class ModEnergyStorage implements IEnergyStorage {
+
         private int energy;
+
         private final int capacity;
         private final int maxExtract;
 
@@ -78,13 +92,20 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
 
         @Override
         public int receiveEnergy(int maxReceive, boolean simulate) {
-            return 0; // не приймає ззовні
+            return 0;
         }
 
         @Override
         public int extractEnergy(int maxExtract, boolean simulate) {
-            int extracted = Math.min(this.energy, Math.min(maxExtract, this.maxExtract));
-            if (!simulate) this.energy -= extracted;
+
+            int extracted = Math.min(
+                    this.energy,
+                    Math.min(maxExtract, this.maxExtract)
+            );
+
+            if (!simulate)
+                this.energy -= extracted;
+
             return extracted;
         }
 
