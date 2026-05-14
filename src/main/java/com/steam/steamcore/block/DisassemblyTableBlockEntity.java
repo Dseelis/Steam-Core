@@ -2,9 +2,12 @@ package com.steam.steamcore.block;
 
 import com.steam.steamcore.Config;
 import com.steam.steamcore.registry.ModBlockEntities;
+import com.steam.steamcore.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -31,6 +34,17 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
     public void disassemble() {
         ItemStack input = inventory.getStackInSlot(0);
         if (input.isEmpty()) return;
+
+        // Special handling for Relics and Artifacts
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
+        String namespace = itemId.getNamespace();
+
+        if (namespace.equals("relics") || namespace.equals("artifacts")) {
+            int amount = 1 + level.random.nextInt(3); // 1-3 essence
+            addOutput(new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), amount));
+            input.shrink(1);
+            return;
+        }
 
         RecipeManager rm = level.getRecipeManager();
         Optional<RecipeHolder<CraftingRecipe>> recipe = rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
