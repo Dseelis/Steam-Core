@@ -48,6 +48,9 @@ public class DebugCommand {
                                 .then(Commands.argument("target", EntityArgument.player())
                                         .executes(DebugCommand::printInfo)))
 
+                        .then(Commands.literal("ping")
+                                .executes(DebugCommand::showPing))
+
                         .then(Commands.literal("abysstp")
                                 .then(Commands.argument("target", EntityArgument.player())
                                         .executes(DebugCommand::forceAbyssTp)))
@@ -82,6 +85,23 @@ public class DebugCommand {
             return 1;
         } catch (Exception e) {
             ctx.getSource().sendFailure(Component.literal("Player not found."));
+            return 0;
+        }
+    }
+
+    private static int showPing(CommandContext<CommandSourceStack> ctx) {
+        try {
+            ServerPlayer player = ctx.getSource().getPlayerOrException();
+            int ping = player.connection.latency();
+
+            ctx.getSource().sendSuccess(() -> Component.literal("[SteamDebug] Your ping: ")
+                    .withStyle(ChatFormatting.GOLD)
+                    .append(Component.literal(ping + "ms")
+                            .withStyle(ping < 100 ? ChatFormatting.GREEN : (ping < 200 ? ChatFormatting.YELLOW : ChatFormatting.RED))), false);
+
+            return 1;
+        } catch (Exception e) {
+            ctx.getSource().sendFailure(Component.literal("Must be run by a player."));
             return 0;
         }
     }

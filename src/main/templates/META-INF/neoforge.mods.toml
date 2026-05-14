@@ -5,7 +5,7 @@ license="Steamcreate2 Mod Custom License"
 [[mods]]
 modId="steamcore"
 logoFile="icon.png"
-version="1.1.2b"
+version="1.1.3b"
 description='''coremod for steamcore modpack.'''
 displayName="Steamcore"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
@@ -26,17 +26,30 @@ authors="Dseelis"
     ordering="AFTER"
     side="BOTH"
 
+[[dependencies.steamcore]]
+    modId="create"
+    type="required"
+    versionRange="[6.0.9,)"
+    ordering="AFTER"
+    side="BOTH"
 
 [[dependencies.steamcore]]
-modId = "ftblibrary"
-mandatory = true
-versionRange = "2101.1.30"
-ordering = "AFTER"
-side = "BOTH"
+    modId="cloth_config"
+    type="required"
+    versionRange="[15.0.140,)"
+    ordering="AFTER"
+    side="BOTH"
 
 [[dependencies.steamcore]]
-modId = "ftbquests"
-mandatory = true
-versionRange = "2101.1.21"
-ordering = "AFTER"
-side = "BOTH"
+    modId="ftblibrary"
+    type="required"
+    versionRange="[2101.1.30,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.steamcore]]
+    modId="ftbquests"
+    type="required"
+    versionRange="[2101.1.21,)"
+    ordering="AFTER"
+    side="BOTH"
