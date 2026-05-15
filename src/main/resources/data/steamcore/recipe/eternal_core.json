@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " A ",
+    "BEC",
+    " D "
+  ],
+  "key": {
+    "A": {
+      "tag": "steamcore:void_core_plate"
+    },
+    "B": {
+      "item": "steamcore:ancient_core_plate"
+    },
+    "C": {
+      "item": "steamcore:mechanical_core_plate"
+    },
+    "E": {
+      "item": "steamcore:forgotten_essence"
+    },
+    "D": {
+      "item": "steamcore:ender_core_plate"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:eternal_core"
+  }
+}
