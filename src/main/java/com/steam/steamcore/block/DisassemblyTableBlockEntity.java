@@ -5,19 +5,23 @@ import com.steam.steamcore.registry.ModBlockEntities;
 import com.steam.steamcore.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-
 import java.util.Optional;
 
 public class DisassemblyTableBlockEntity extends BlockEntity {
+
+    private static final TagKey<Item> DISASSEMBLES_TO_ESSENCE =
+            ItemTags.create(ResourceLocation.fromNamespaceAndPath("steamcore", "disassembles_to_essence"));
 
     // 1 input slot (0), 6 output slots (1-6)
     public final ItemStackHandler inventory = new ItemStackHandler(7) {
@@ -35,11 +39,8 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
         ItemStack input = inventory.getStackInSlot(0);
         if (input.isEmpty()) return;
 
-        // Special handling for Relics and Artifacts
-        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
-        String namespace = itemId.getNamespace();
-
-        if (namespace.equals("relics") || namespace.equals("artifacts")) {
+        // Check if item is in the disassembles_to_essence tag
+        if (input.is(DISASSEMBLES_TO_ESSENCE)) {
             int amount = 1 + level.random.nextInt(3); // 1-3 essence
             addOutput(new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), amount));
             input.shrink(1);
@@ -48,11 +49,15 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
 
         RecipeManager rm = level.getRecipeManager();
         Optional<RecipeHolder<CraftingRecipe>> recipe = rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
-                .filter(r -> r.value().getResultItem(level.registryAccess()).is(input.getItem()))
+                .filter(r -> {
+                    ItemStack result = r.value().getResultItem(level.registryAccess());
+                    return result.is(input.getItem()) && input.getCount() >= result.getCount();
+                })
                 .findFirst();
 
         if (recipe.isPresent()) {
             CraftingRecipe craftingRecipe = recipe.get().value();
+            int resultCount = craftingRecipe.getResultItem(level.registryAccess()).getCount();
 
             for (Ingredient ingredient : craftingRecipe.getIngredients()) {
                 if (ingredient.isEmpty()) continue;
@@ -67,7 +72,7 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
                 }
             }
             
-            input.shrink(1);
+            input.shrink(resultCount);
         }
     }
 
