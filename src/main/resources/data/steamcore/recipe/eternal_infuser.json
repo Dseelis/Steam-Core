@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "hbh",
+    "hbh",
+    "hah"
+  ],
+  "key": {
+    "a": {
+      "item": "steamcore:wrench"
+    },
+    "b": {
+      "item": "create:electron_tube"
+    },
+    "h": {
+      "item": "tfmg:industrial_aluminum_casing"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:eternal_infuser"
+  }
+}

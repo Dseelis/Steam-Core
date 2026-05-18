@@ -50,10 +50,10 @@ public class GammaIgniteItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (level.isClientSide) return InteractionResultHolder.success(stack);
+        if (player.level().isClientSide) return InteractionResultHolder.success(stack);
         if (!(player instanceof ServerPlayer serverPlayer)) return InteractionResultHolder.pass(stack);
 
-        if (!Config.ENABLE_GAMMA_IGNITE.get()) {
+        if (!Config.ENABLE_WIP_ITEMS.get()) {
             serverPlayer.sendSystemMessage(
                     Component.literal("Gamma Ignite is disabled in config.")
                             .withStyle(ChatFormatting.RED));

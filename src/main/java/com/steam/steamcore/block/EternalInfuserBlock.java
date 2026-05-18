@@ -1,16 +1,17 @@
 package com.steam.steamcore.block;
 
-import com.steam.steamcore.registry.ModItems;
-import net.minecraft.ChatFormatting;
+import com.steam.steamcore.inventory.EternalInfuserMenu;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -42,35 +43,26 @@ public class EternalInfuserBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return createTickerHelper(type, com.steam.steamcore.registry.ModBlockEntities.ETERNAL_INFUSER_BE_TYPE.get(),
+                EternalInfuserBlockEntity::tick);
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level,
                                                BlockPos pos, Player player,
                                                BlockHitResult hitResult) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
-
-        BlockEntity be = level.getBlockEntity(pos);
-        if (!(be instanceof EternalInfuserBlockEntity infuser)) {
-            return InteractionResult.PASS;
+        if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof EternalInfuserBlockEntity infuser) {
+                serverPlayer.openMenu(new SimpleMenuProvider(
+                        (id, inv, p) -> new EternalInfuserMenu(id, inv, infuser, infuser.getContainerData()),
+                        net.minecraft.network.chat.Component.literal("Eternal Infuser")
+                ), pos);
+            }
         }
-
-        ItemStack held = player.getMainHandItem();
-
-        if (held.isEmpty()) {
-            int stored = infuser.getEnergyStored();
-            int max    = infuser.getMaxEnergyStored();
-            player.sendSystemMessage(
-                    Component.literal("Eternal Infuser: ")
-                            .withStyle(ChatFormatting.GOLD)
-                            .append(Component.literal(stored + " / " + max + " FE")
-                                    .withStyle(ChatFormatting.YELLOW))
-            );
-            return InteractionResult.SUCCESS;
-        }
-
-        if (held.is(ModItems.EMPTY_ETERNAL_GEM.get())) {
-            return infuser.tryCharge(player, held, level, pos);
-        }
-
-        return InteractionResult.PASS;
+        return InteractionResult.SUCCESS;
     }
 }

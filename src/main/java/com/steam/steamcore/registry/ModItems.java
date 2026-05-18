@@ -30,6 +30,12 @@ public class ModItems {
     public static final DeferredItem<BlockItem> ETERNAL_ORE_ITEM =
             ITEMS.registerSimpleBlockItem("eternal_ore", ModBlocks.ETERNAL_ORE);
 
+    public static final DeferredItem<BlockItem> DISASSEMBLY_TABLE_ITEM =
+            ITEMS.registerSimpleBlockItem("disassembly_table", ModBlocks.DISASSEMBLY_TABLE);
+
+    public static final DeferredItem<BlockItem> KINETIC_GENERATOR_ITEM =
+            ITEMS.registerSimpleBlockItem("kinetic_generator", ModBlocks.KINETIC_GENERATOR);
+
     // Items
 
     public static final DeferredItem<Item> UNFINISHED_CALCULATION_PRESS =
@@ -47,6 +53,21 @@ public class ModItems {
     public static final DeferredItem<Item> WRENCH =
             ITEMS.register("wrench",
                     () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> FORGOTTEN_ESSENCE =
+            ITEMS.registerSimpleItem("forgotten_essence");
+
+    public static final DeferredItem<Item> ANCIENT_CORE_PLATE =
+            ITEMS.registerSimpleItem("ancient_core_plate");
+
+    public static final DeferredItem<Item> MECHANICAL_CORE_PLATE =
+            ITEMS.registerSimpleItem("mechanical_core_plate");
+
+    public static final DeferredItem<Item> VOID_CORE_PLATE =
+            ITEMS.registerSimpleItem("void_core_plate");
+
+    public static final DeferredItem<Item> ENDER_CORE_PLATE =
+            ITEMS.registerSimpleItem("ender_core_plate");
 
     public static final DeferredItem<Item> EMPTY_ETERNAL_GEM =
             ITEMS.registerSimpleItem("empty_eternal_gem");

@@ -1,5 +1,6 @@
 package com.steam.steamcore.registry;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.SteamCore;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -34,10 +35,20 @@ public class ModCreativeTabs {
                                 output.accept(ModItems.EMPTY_ETERNAL_GEM.get());
                                 output.accept(ModItems.ETERNAL_CORE.get());
                                 output.accept(ModItems.ETERNAL_GEM.get());
-                                output.accept(ModItems.GAMMA_IGNITE.get());
-                                output.accept(ModItems.SWORD_PART.get());
-                                output.accept(ModItems.SWORD_PART_2.get());
-                                output.accept(ModItems.FINAL_SWORD.get());
+                                output.accept(ModItems.DISASSEMBLY_TABLE_ITEM.get());
+                                output.accept(ModItems.KINETIC_GENERATOR_ITEM.get());
+
+                                if (Config.ENABLE_WIP_ITEMS.get()) {
+                                    output.accept(ModItems.FORGOTTEN_ESSENCE.get());
+                                    output.accept(ModItems.ANCIENT_CORE_PLATE.get());
+                                    output.accept(ModItems.MECHANICAL_CORE_PLATE.get());
+                                    output.accept(ModItems.VOID_CORE_PLATE.get());
+                                    output.accept(ModItems.ENDER_CORE_PLATE.get());
+                                    output.accept(ModItems.GAMMA_IGNITE.get());
+                                    output.accept(ModItems.SWORD_PART.get());
+                                    output.accept(ModItems.SWORD_PART_2.get());
+                                    output.accept(ModItems.FINAL_SWORD.get());
+                                }
                             })
                             .build()
             );

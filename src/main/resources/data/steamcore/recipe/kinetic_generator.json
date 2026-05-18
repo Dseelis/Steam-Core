@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IWI",
+    "III",
+    "IRI"
+  ],
+  "key": {
+    "W": {
+      "item": "create:shaft"
+    },
+    "I": {
+      "item": "create:brass_ingot"
+    },
+    "R": {
+      "item": "steamcore:wrench"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:kinetic_generator"
+  }
+}

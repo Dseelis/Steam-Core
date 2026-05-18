@@ -11,7 +11,7 @@
       "item": "minecraft:iron_ingot"
     },
     "b": {
-      "item": "steamcore:eternal_gem"
+      "item": "steamcore:empty_eternal_gem"
     }
   },
   "result": {

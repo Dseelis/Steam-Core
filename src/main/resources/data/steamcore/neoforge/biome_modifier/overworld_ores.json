@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "steamcore:gamma_ore",
+    "steamcore:eternal_ore"
+  ],
+  "step": "underground_ores"
+}
