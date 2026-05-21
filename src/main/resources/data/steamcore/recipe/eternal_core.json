@@ -8,7 +8,7 @@
   ],
   "key": {
     "A": {
-      "tag": "steamcore:void_core_plate"
+      "item": "steamcore:void_core_plate"
     },
     "B": {
       "item": "steamcore:ancient_core_plate"

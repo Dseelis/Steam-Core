@@ -3,6 +3,7 @@ package com.steam.steamcore.registry;
 import com.steam.steamcore.SteamCore;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -52,7 +53,17 @@ public class ModItems {
 
     public static final DeferredItem<Item> WRENCH =
             ITEMS.register("wrench",
-                    () -> new Item(new Item.Properties().stacksTo(1)));
+                    () -> new Item(new Item.Properties().stacksTo(1)) {
+                        @Override
+                        public boolean hasCraftingRemainingItem(ItemStack stack) {
+                            return true;
+                        }
+
+                        @Override
+                        public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
+                            return new ItemStack(this);
+                        }
+                    });
 
     public static final DeferredItem<Item> FORGOTTEN_ESSENCE =
             ITEMS.registerSimpleItem("forgotten_essence");
