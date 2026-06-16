@@ -38,17 +38,54 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
         super(ModBlockEntities.DISASSEMBLY_TABLE_BE_TYPE.get(), pos, state);
     }
 
-    public void disassemble() {
+    public boolean canDisassemble() {
         ItemStack input = inventory.getStackInSlot(0);
-        if (input.isEmpty()) return;
+        if (input.isEmpty()) return false;
 
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
         String namespace = itemId.getNamespace();
+
+        boolean isRelic = input.is(DISASSEMBLES_TO_ESSENCE)
+                || namespace.equals("relics")
+                || namespace.equals("artifacts")
+                || namespace.equals("accessories")
+                || namespace.equals("enigmaticlegacy")
+                || namespace.contains("relic")
+                || namespace.contains("artifact")
+                || (namespace.equals("steamcore") && itemId.getPath().endsWith("_core_plate"));
+
+        if (isRelic) {
+            return hasRoomFor(new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), 2));
+        }
+
+        RecipeManager rm = level.getRecipeManager();
+        return rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
+                .anyMatch(r -> {
+                    ItemStack result = r.value().getResultItem(level.registryAccess());
+                    return result.is(input.getItem()) && input.getCount() >= result.getCount();
+                });
+    }
+
+    public void disassemble() {
+        if (!canDisassemble()) return;
+
+        ItemStack input = inventory.getStackInSlot(0);
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
+        String namespace = itemId.getNamespace();
+
+        if (level != null) {
+            level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(), 
+                    net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+        }
 
         // Check if item is a relic/artifact (tag, mod namespace, or core plates)
         boolean isRelic = input.is(DISASSEMBLES_TO_ESSENCE)
                 || namespace.equals("relics")
                 || namespace.equals("artifacts")
+                || namespace.equals("accessories")
+                || namespace.equals("enigmaticlegacy")
+                || namespace.contains("relic")
+                || namespace.contains("artifact")
                 || (namespace.equals("steamcore") && itemId.getPath().endsWith("_core_plate"));
 
         if (isRelic) {

@@ -18,7 +18,7 @@ public class SteamCore {
 
     public static final String MODID        = "steamcore";
     public static final String PACK_NAME    = "SteamCreate 2";
-    public static final String PACK_VERSION = "2.1.3b";
+    public static final String PACK_VERSION = "2.1.4b";
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -30,6 +30,7 @@ public class SteamCore {
         ModCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
         ModMenuTypes.MENUS.register(modEventBus);
+        com.steam.steamcore.registry.ModSounds.SOUND_EVENTS.register(modEventBus);
 
         // Creative tab injection
         modEventBus.addListener(ModCreativeTabs::addCreative);

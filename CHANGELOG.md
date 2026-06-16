@@ -1,3 +1,5 @@
+# [steamcore-1.1.3b-neoforge-1.21.1] -
+
 # [steamcore-1.1.3b-neoforge-1.21.1] - 18.05.2026
 Changes to recipes in Steamcreate2 versions 2.1.2 and earlier will cause issues
 Added new Disassembly Tables, a Kinetic Generator for the Eternal Infuser, parts for the Eternal Core, and more

@@ -1,0 +1,9 @@
+{
+  "disassemble": {
+    "category": "block",
+    "subtitle": "steamcore.subtitle.disassemble",
+    "sounds": [
+      "steamcore:disassemble"
+    ]
+  }
+}

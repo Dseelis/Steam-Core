@@ -35,11 +35,11 @@ public class ModCreativeTabs {
                                 output.accept(ModItems.EMPTY_ETERNAL_GEM.get());
                                 output.accept(ModItems.ETERNAL_CORE.get());
                                 output.accept(ModItems.ETERNAL_GEM.get());
-                                output.accept(ModItems.DISASSEMBLY_TABLE_ITEM.get());
                                 output.accept(ModItems.KINETIC_GENERATOR_ITEM.get());
 
                                 if (Config.ENABLE_WIP_ITEMS.get()) {
                                     output.accept(ModItems.FORGOTTEN_ESSENCE.get());
+                                    output.accept(ModItems.DISASSEMBLY_TABLE_ITEM.get());
                                     output.accept(ModItems.ANCIENT_CORE_PLATE.get());
                                     output.accept(ModItems.MECHANICAL_CORE_PLATE.get());
                                     output.accept(ModItems.VOID_CORE_PLATE.get());

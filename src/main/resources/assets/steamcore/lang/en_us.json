@@ -42,5 +42,6 @@
   "steamcore.configuration.abyssHeight.tooltip": "The Y level at which the player is consumed by the Abyss.",
   "steamcore.configuration.abyssDamage": "Abyss Damage (WIP)",
   "steamcore.configuration.abyssDamage.tooltip": "Amount of magic damage dealt to the player before teleportation.",
-  "steamcore.configuration.enablePortals": "Enable Vanilla Portals"
+  "steamcore.configuration.enablePortals": "Enable Vanilla Portals",
+  "steamcore.subtitle.disassemble": "Item disassembled"
 }

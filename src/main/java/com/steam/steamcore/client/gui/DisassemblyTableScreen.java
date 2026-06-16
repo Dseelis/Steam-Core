@@ -15,15 +15,27 @@ public class DisassemblyTableScreen extends AbstractContainerScreen<DisassemblyT
         this.inventoryLabelY = this.imageHeight - 94;
     }
 
+    private Button disassembleButton;
+
     @Override
     protected void init() {
         super.init();
 
-        this.addRenderableWidget(Button.builder(Component.literal("Disassemble"), button -> {
+        this.disassembleButton = Button.builder(Component.literal("Disassemble"), button -> {
             if (this.minecraft != null && this.minecraft.gameMode != null) {
                 this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
             }
-        }).bounds(this.leftPos + 10, this.topPos + 45, 80, 20).build());
+        }).bounds(this.leftPos + 10, this.topPos + 45, 80, 20).build();
+
+        this.addRenderableWidget(this.disassembleButton);
+    }
+
+    @Override
+    protected void containerTick() {
+        super.containerTick();
+        if (this.disassembleButton != null) {
+            this.disassembleButton.active = this.menu.blockEntity.canDisassemble();
+        }
     }
 
     @Override
