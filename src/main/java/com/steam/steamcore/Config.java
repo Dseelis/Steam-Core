@@ -13,6 +13,7 @@ public class Config {
     public static final ModConfigSpec.IntValue ABYSS_DAMAGE;
     public static final ModConfigSpec.BooleanValue ENABLE_PORTALS;
     public static final ModConfigSpec.DoubleValue DISASSEMBLY_FAIL_CHANCE;
+    public static final ModConfigSpec.BooleanValue ENABLE_DISASSEMBLY_SOUND;
 
     // DEBUG
     public static final ModConfigSpec.BooleanValue ENABLE_STEAMDEBUG_COMMAND;
@@ -36,6 +37,10 @@ public class Config {
         DISASSEMBLY_FAIL_CHANCE = BUILDER
                 .comment("Chance of failed disassembly (0.0 - 1.0)")
                 .defineInRange("disassemblyFailChance", 0.15, 0.0, 1.0);
+
+        ENABLE_DISASSEMBLY_SOUND = BUILDER
+                .comment("Enable disassembly table sound")
+                .define("enableDisassemblySound", true);
 
         BUILDER.pop();
 

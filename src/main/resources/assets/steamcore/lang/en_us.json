@@ -43,5 +43,6 @@
   "steamcore.configuration.abyssDamage": "Abyss Damage (WIP)",
   "steamcore.configuration.abyssDamage.tooltip": "Amount of magic damage dealt to the player before teleportation.",
   "steamcore.configuration.enablePortals": "Enable Vanilla Portals",
+  "steamcore.configuration.enableDisassemblySound": "Enable Disassembly Sound",
   "steamcore.subtitle.disassemble": "Item disassembled"
 }

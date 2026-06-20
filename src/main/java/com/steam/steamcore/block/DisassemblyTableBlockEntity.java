@@ -74,8 +74,10 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
         String namespace = itemId.getNamespace();
 
         if (level != null) {
-            level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(), 
-                    net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+            if (Config.ENABLE_DISASSEMBLY_SOUND.get()) {
+                level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(), 
+                        net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
         }
 
         // Check if item is a relic/artifact (tag, mod namespace, or core plates)

@@ -36,6 +36,11 @@ public class ClothConfigScreen {
                 .setSaveConsumer(Config.DISASSEMBLY_FAIL_CHANCE::set)
                 .build());
 
+        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableDisassemblySound"), Config.ENABLE_DISASSEMBLY_SOUND.get())
+                .setDefaultValue(true)
+                .setSaveConsumer(Config.ENABLE_DISASSEMBLY_SOUND::set)
+                .build());
+
         // DEBUG CATEGORY
         ConfigCategory debug = builder.getOrCreateCategory(Component.translatable("steamcore.configuration.debug"));
 

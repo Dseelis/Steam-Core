@@ -43,5 +43,6 @@
   "steamcore.configuration.abyssDamage": "Урон Бездны (WIP)",
   "steamcore.configuration.abyssDamage.tooltip": "Количество магического урона, наносимого игроку перед телепортацией.",
   "steamcore.configuration.enablePortals": "Включить ванильные порталы",
+  "steamcore.configuration.enableDisassemblySound": "Включить звук стола разборки",
   "steamcore.subtitle.disassemble": "Предмет разобран"
 }
