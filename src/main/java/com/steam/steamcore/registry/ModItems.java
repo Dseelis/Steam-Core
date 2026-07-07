@@ -53,17 +53,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> WRENCH =
             ITEMS.register("wrench",
-                    () -> new Item(new Item.Properties().stacksTo(1)) {
-                        @Override
-                        public boolean hasCraftingRemainingItem(ItemStack stack) {
-                            return true;
-                        }
-
-                        @Override
-                        public ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-                            return new ItemStack(this);
-                        }
-                    });
+                    () -> new com.steam.steamcore.item.WrenchItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> FORGOTTEN_ESSENCE =
             ITEMS.registerSimpleItem("forgotten_essence");

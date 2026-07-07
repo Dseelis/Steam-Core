@@ -31,7 +31,9 @@
   "steamcore.configuration.debug": "Функции отладки",
   "steamcore.configuration.dev": "Инструменты разработчика",
   "steamcore.configuration.enableWipItems": "Включить предметы в разработке (WIP)",
+  "steamcore.configuration.enableWipItems.tooltip": "Включает предметы в разработке во вкладке творчества, а также в JEI/EMI",
   "steamcore.configuration.showIntroMessages": "Показывать вступительные сообщения",
+  "steamcore.configuration.showIntroMessages.tooltip": "Показывает вступительные сообщения в чате при входе в мир. (не готово)",
   "steamcore.configuration.enableSteamDebugCommand": "Команда /steamdebug",
   "steamcore.configuration.enableSteamDebugCommand.tooltip": "Включает команду /steamdebug. Команды: info, ping, abysstp, setenergy, packinfo, modlist.",
   "steamcore.configuration.enableAbyss": "Включить Бездну (WIP)",
@@ -43,6 +45,7 @@
   "steamcore.configuration.abyssDamage": "Урон Бездны (WIP)",
   "steamcore.configuration.abyssDamage.tooltip": "Количество магического урона, наносимого игроку перед телепортацией.",
   "steamcore.configuration.enablePortals": "Включить ванильные порталы",
+  "steamcore.configuration.enablePortals.tooltip": "Разрешает создание порталов в Незер. Если отключено, порталы нельзя будет зажечь.",
   "steamcore.configuration.enableDisassemblySound": "Включить звук стола разборки",
   "steamcore.subtitle.disassemble": "Предмет разобран"
 }
