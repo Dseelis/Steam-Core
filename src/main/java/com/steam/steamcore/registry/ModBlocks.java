@@ -49,4 +49,10 @@ public class ModBlocks {
                     () -> new com.steam.steamcore.block.KineticGeneratorBlock(
                             BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4f)
                     ));
+
+    public static final DeferredBlock<com.steam.steamcore.block.EngineeringTableBlock> ENGINEERING_TABLE =
+            BLOCKS.register("engineering_table",
+                    () -> new com.steam.steamcore.block.EngineeringTableBlock(
+                            BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).strength(2.5f)
+                    ));
 }

@@ -40,6 +40,7 @@ public class ModCreativeTabs {
                                 if (Config.ENABLE_WIP_ITEMS.get()) {
                                     output.accept(ModItems.FORGOTTEN_ESSENCE.get());
                                     output.accept(ModItems.DISASSEMBLY_TABLE_ITEM.get());
+                                    output.accept(ModItems.ENGINEERING_TABLE_ITEM.get());
                                     output.accept(ModItems.ANCIENT_CORE_PLATE.get());
                                     output.accept(ModItems.MECHANICAL_CORE_PLATE.get());
                                     output.accept(ModItems.VOID_CORE_PLATE.get());

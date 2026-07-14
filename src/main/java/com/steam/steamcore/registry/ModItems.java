@@ -37,6 +37,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KINETIC_GENERATOR_ITEM =
             ITEMS.registerSimpleBlockItem("kinetic_generator", ModBlocks.KINETIC_GENERATOR);
 
+    public static final DeferredItem<BlockItem> ENGINEERING_TABLE_ITEM =
+            ITEMS.registerSimpleBlockItem("engineering_table", ModBlocks.ENGINEERING_TABLE);
+
     // Items
 
     public static final DeferredItem<Item> UNFINISHED_CALCULATION_PRESS =

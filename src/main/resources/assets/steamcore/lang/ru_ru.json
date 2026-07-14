@@ -7,6 +7,7 @@
   "item.steamcore.empty_eternal_gem": "Пустой вечный самоцвет",
   "block.steamcore.gamma_brick": "Гамма-кирпич",
   "block.steamcore.disassembly_table": "Стол разборки",
+  "block.steamcore.engineering_table": "Инженерный верстак",
   "block.steamcore.kinetic_generator": "Кинетический генератор",
   "item.steamcore.wrench": "Гаечный ключ",
   "item.steamcore.forgotten_essence": "Забытая эссенция",
@@ -47,5 +48,7 @@
   "steamcore.configuration.enablePortals": "Включить ванильные порталы",
   "steamcore.configuration.enablePortals.tooltip": "Разрешает создание порталов в Незер. Если отключено, порталы нельзя будет зажечь.",
   "steamcore.configuration.enableDisassemblySound": "Включить звук стола разборки",
-  "steamcore.subtitle.disassemble": "Предмет разобран"
+  "steamcore.subtitle.disassemble": "Предмет разобран",
+  "gui.steamcore.engineering_table.attach": "Прикрепить очки",
+  "gui.steamcore.engineering_table.detach": "Снять очки"
 }

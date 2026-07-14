@@ -43,4 +43,12 @@ public class ModBlockEntities {
                 return type;
             }
     );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.steam.steamcore.block.EngineeringTableBlockEntity>>
+            ENGINEERING_TABLE_BE_TYPE = BLOCK_ENTITY_TYPES.register(
+            "engineering_table",
+            () -> BlockEntityType.Builder
+                    .of(com.steam.steamcore.block.EngineeringTableBlockEntity::new, ModBlocks.ENGINEERING_TABLE.get())
+                    .build(null)
+    );
 }

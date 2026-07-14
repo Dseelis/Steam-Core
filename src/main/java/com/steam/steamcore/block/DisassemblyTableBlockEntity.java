@@ -73,14 +73,31 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
         ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
         String namespace = itemId.getNamespace();
 
+        // KubeJS event
+        com.steam.steamcore.integration.kubejs.DisassemblyEvent event =
+            com.steam.steamcore.integration.kubejs.SteamCoreKubeJSEvents.fireDisassemblyEvent(level, input.copy());
+
+        if (event.isCancelled()) {
+            if (event.hasCustomOutputs()) {
+                for (ItemStack output : event.getCustomOutputs()) {
+                    if (!output.isEmpty() && hasRoomFor(output)) {
+                        addOutput(output);
+                    }
+                }
+                input.shrink(1);
+                setChanged();
+            }
+            return;
+        }
+
         if (level != null) {
             if (Config.ENABLE_DISASSEMBLY_SOUND.get()) {
-                level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(), 
+                level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(),
                         net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         }
 
-        // Check if item is a relic/artifact (tag, mod namespace, or core plates)
+        // Check if item is a relic/artifact
         boolean isRelic = input.is(DISASSEMBLES_TO_ESSENCE)
                 || namespace.equals("relics")
                 || namespace.equals("artifacts")
@@ -113,7 +130,6 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
 
         if (recipes.isEmpty()) return;
 
-        // Sort to find the most "canonical" recipe
         String itemNamespace = namespace; // Already calculated
 
         recipes.sort((a, b) -> {
@@ -151,8 +167,7 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
                 ItemStack component = items[0].copy();
                 for (ItemStack s : items) {
                     ResourceLocation sId = BuiltInRegistries.ITEM.getKey(s.getItem());
-                    
-                    // Prevention: don't disassemble into bamboo unless the original item is from a bamboo-related mod
+
                     if (sId.getPath().equals("bamboo") && !itemNamespace.contains("bamboo")) {
                         continue;
                     }
@@ -198,8 +213,6 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
     }
 
     private boolean hasRoomFor(List<ItemStack> stacks) {
-        // Simple heuristic: if any stack can't fit at all, return false
-        // For a more accurate check, we'd need to simulate the entire insertion
         for (ItemStack s : stacks) {
             if (!hasRoomFor(s)) return false;
         }

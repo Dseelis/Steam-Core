@@ -7,6 +7,7 @@
   "item.steamcore.empty_eternal_gem": "Empty Eternal Gem",
   "block.steamcore.gamma_brick": "Gamma Brick",
   "block.steamcore.disassembly_table": "Disassembly Table",
+  "block.steamcore.engineering_table": "Engineering Table",
   "block.steamcore.kinetic_generator": "Kinetic Generator",
   "item.steamcore.wrench": "Wrench",
   "item.steamcore.forgotten_essence": "Forgotten Essence",
@@ -47,5 +48,7 @@
   "steamcore.configuration.enablePortals": "Enable Vanilla Portals",
   "steamcore.configuration.enablePortals.tooltip": "Allows the creation of Nether portals. If false, portals cannot be lit.",
   "steamcore.configuration.enableDisassemblySound": "Enable Disassembly Sound",
-  "steamcore.subtitle.disassemble": "Item disassembled"
+  "steamcore.subtitle.disassemble": "Item disassembled",
+  "gui.steamcore.engineering_table.attach": "Attach Goggles",
+  "gui.steamcore.engineering_table.detach": "Detach Goggles"
 }
