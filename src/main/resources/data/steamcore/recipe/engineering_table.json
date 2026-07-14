@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WWW",
+    "IRI",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:planks"
+    },
+    "I": {
+      "item": "create:gold_sheet"
+    },
+    "R": {
+      "item": "steamcore:wrench"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "steamcore:disassembly_table"
+  }
+}
