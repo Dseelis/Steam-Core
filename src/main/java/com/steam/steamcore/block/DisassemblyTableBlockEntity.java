@@ -16,7 +16,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
-import java.util.Optional;
+import net.minecraft.core.registries.BuiltInRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DisassemblyTableBlockEntity extends BlockEntity {
 
@@ -35,45 +38,185 @@ public class DisassemblyTableBlockEntity extends BlockEntity {
         super(ModBlockEntities.DISASSEMBLY_TABLE_BE_TYPE.get(), pos, state);
     }
 
-    public void disassemble() {
+    public boolean canDisassemble() {
         ItemStack input = inventory.getStackInSlot(0);
-        if (input.isEmpty()) return;
+        if (input.isEmpty()) return false;
 
-        // Check if item is in the disassembles_to_essence tag
-        if (input.is(DISASSEMBLES_TO_ESSENCE)) {
-            int amount = 1 + level.random.nextInt(3); // 1-3 essence
-            addOutput(new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), amount));
-            input.shrink(1);
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
+        String namespace = itemId.getNamespace();
+
+        boolean isRelic = input.is(DISASSEMBLES_TO_ESSENCE)
+                || namespace.equals("relics")
+                || namespace.equals("artifacts")
+                || namespace.equals("accessories")
+                || namespace.equals("enigmaticlegacy")
+                || namespace.contains("relic")
+                || namespace.contains("artifact")
+                || (namespace.equals("steamcore") && itemId.getPath().endsWith("_core_plate"));
+
+        if (isRelic) {
+            return hasRoomFor(new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), 2));
+        }
+
+        RecipeManager rm = level.getRecipeManager();
+        return rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
+                .anyMatch(r -> {
+                    ItemStack result = r.value().getResultItem(level.registryAccess());
+                    return result.is(input.getItem()) && input.getCount() >= result.getCount();
+                });
+    }
+
+    public void disassemble() {
+        if (!canDisassemble()) return;
+
+        ItemStack input = inventory.getStackInSlot(0);
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(input.getItem());
+        String namespace = itemId.getNamespace();
+
+        // KubeJS event
+        com.steam.steamcore.integration.kubejs.DisassemblyEvent event =
+            com.steam.steamcore.integration.kubejs.SteamCoreKubeJSEvents.fireDisassemblyEvent(level, input.copy());
+
+        if (event.isCancelled()) {
+            if (event.hasCustomOutputs()) {
+                for (ItemStack output : event.getCustomOutputs()) {
+                    if (!output.isEmpty() && hasRoomFor(output)) {
+                        addOutput(output);
+                    }
+                }
+                input.shrink(1);
+                setChanged();
+            }
+            return;
+        }
+
+        if (level != null) {
+            if (Config.ENABLE_DISASSEMBLY_SOUND.get()) {
+                level.playSound(null, worldPosition, com.steam.steamcore.registry.ModSounds.DISASSEMBLE.get(),
+                        net.minecraft.sounds.SoundSource.BLOCKS, 1.0F, 1.0F);
+            }
+        }
+
+        // Check if item is a relic/artifact
+        boolean isRelic = input.is(DISASSEMBLES_TO_ESSENCE)
+                || namespace.equals("relics")
+                || namespace.equals("artifacts")
+                || namespace.equals("accessories")
+                || namespace.equals("enigmaticlegacy")
+                || namespace.contains("relic")
+                || namespace.contains("artifact")
+                || (namespace.equals("steamcore") && itemId.getPath().endsWith("_core_plate"));
+
+        if (isRelic) {
+            // Relics give a more generous amount of essence (2-5)
+            int amount = 2 + level.random.nextInt(4);
+            ItemStack essence = new ItemStack(ModItems.FORGOTTEN_ESSENCE.get(), amount);
+
+            if (hasRoomFor(essence)) {
+                addOutput(essence);
+                input.shrink(1);
+                setChanged();
+            }
             return;
         }
 
         RecipeManager rm = level.getRecipeManager();
-        Optional<RecipeHolder<CraftingRecipe>> recipe = rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
+        List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>(rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
                 .filter(r -> {
                     ItemStack result = r.value().getResultItem(level.registryAccess());
                     return result.is(input.getItem()) && input.getCount() >= result.getCount();
                 })
-                .findFirst();
+                .toList());
 
-        if (recipe.isPresent()) {
-            CraftingRecipe craftingRecipe = recipe.get().value();
-            int resultCount = craftingRecipe.getResultItem(level.registryAccess()).getCount();
+        if (recipes.isEmpty()) return;
 
-            for (Ingredient ingredient : craftingRecipe.getIngredients()) {
-                if (ingredient.isEmpty()) continue;
-                
-                ItemStack component = ingredient.getItems()[0].copy();
-                
-                // chance to recover each item (configurable or random)
-                float failChance = Config.DISASSEMBLY_FAIL_CHANCE.get().floatValue();
+        String itemNamespace = namespace; // Already calculated
 
-                if (level.random.nextFloat() > failChance) {
-                    addOutput(component);
+        recipes.sort((a, b) -> {
+            // 1. Prefer recipes from the same mod as the item
+            boolean aSameMod = a.id().getNamespace().equals(itemNamespace);
+            boolean bSameMod = b.id().getNamespace().equals(itemNamespace);
+            if (aSameMod != bSameMod) return aSameMod ? -1 : 1;
+
+            // 2. Prefer recipes that consume more of the input (higher result count)
+            int aCount = a.value().getResultItem(level.registryAccess()).getCount();
+            int bCount = b.value().getResultItem(level.registryAccess()).getCount();
+            if (aCount != bCount) return Integer.compare(bCount, aCount);
+
+            // 3. Prefer recipes with more ingredients (avoid simple 1-to-1 conversions)
+            int aIng = a.value().getIngredients().size();
+            int bIng = b.value().getIngredients().size();
+            return Integer.compare(bIng, aIng);
+        });
+
+        CraftingRecipe craftingRecipe = recipes.get(0).value();
+        int resultCount = craftingRecipe.getResultItem(level.registryAccess()).getCount();
+
+        // Collect potential outputs to check for space
+        List<ItemStack> potentialOutputs = new ArrayList<>();
+        float failChance = Config.DISASSEMBLY_FAIL_CHANCE.get().floatValue();
+
+        for (Ingredient ingredient : craftingRecipe.getIngredients()) {
+            if (ingredient.isEmpty()) continue;
+
+            ItemStack[] items = ingredient.getItems();
+            if (items.length == 0) continue;
+
+            if (level.random.nextFloat() > failChance) {
+                // Try to find an item from the same mod as the result, or just pick index 0
+                ItemStack component = items[0].copy();
+                for (ItemStack s : items) {
+                    ResourceLocation sId = BuiltInRegistries.ITEM.getKey(s.getItem());
+
+                    if (sId.getPath().equals("bamboo") && !itemNamespace.contains("bamboo")) {
+                        continue;
+                    }
+
+                    if (sId.getNamespace().equals(itemNamespace)) {
+                        component = s.copy();
+                        break;
+                    }
                 }
+
+                // Final check: if we ended up with bamboo and it's not appropriate, skip this ingredient
+                ResourceLocation finalId = BuiltInRegistries.ITEM.getKey(component.getItem());
+                if (finalId.getPath().equals("bamboo") && !itemNamespace.contains("bamboo")) {
+                    continue;
+                }
+
+                potentialOutputs.add(component);
             }
-            
-            input.shrink(resultCount);
         }
+
+        // Only proceed if we can fit all components
+        if (hasRoomFor(potentialOutputs)) {
+            for (ItemStack output : potentialOutputs) {
+                addOutput(output);
+            }
+            input.shrink(resultCount);
+            setChanged();
+        }
+    }
+
+    private boolean hasRoomFor(ItemStack stack) {
+        ItemStack copy = stack.copy();
+        for (int i = 1; i < 7; i++) {
+            ItemStack existing = inventory.getStackInSlot(i);
+            if (existing.isEmpty()) return true;
+            if (ItemStack.isSameItemSameComponents(existing, copy)) {
+                int canAdd = existing.getMaxStackSize() - existing.getCount();
+                if (canAdd >= copy.getCount()) return true;
+                copy.shrink(canAdd);
+            }
+        }
+        return copy.isEmpty();
+    }
+
+    private boolean hasRoomFor(List<ItemStack> stacks) {
+        for (ItemStack s : stacks) {
+            if (!hasRoomFor(s)) return false;
+        }
+        return true;
     }
 
     private void addOutput(ItemStack stack) {

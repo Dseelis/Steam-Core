@@ -20,11 +20,13 @@ public class ClothConfigScreen {
 
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.showIntroMessages"), Config.SHOW_INTRO_MESSAGES.get())
                 .setDefaultValue(false)
+                .setTooltip(Component.translatable("steamcore.configuration.showIntroMessages.tooltip"))
                 .setSaveConsumer(Config.SHOW_INTRO_MESSAGES::set)
                 .build());
 
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enablePortals"), Config.ENABLE_PORTALS.get())
                 .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.enablePortals.tooltip"))
                 .setSaveConsumer(Config.ENABLE_PORTALS::set)
                 .build());
 
@@ -34,6 +36,11 @@ public class ClothConfigScreen {
                 .setMax(1.0)
                 .setTooltip(Component.translatable("steamcore.configuration.disassemblyFailChance.tooltip"))
                 .setSaveConsumer(Config.DISASSEMBLY_FAIL_CHANCE::set)
+                .build());
+
+        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableDisassemblySound"), Config.ENABLE_DISASSEMBLY_SOUND.get())
+                .setDefaultValue(true)
+                .setSaveConsumer(Config.ENABLE_DISASSEMBLY_SOUND::set)
                 .build());
 
         // DEBUG CATEGORY
@@ -50,7 +57,7 @@ public class ClothConfigScreen {
 
         dev.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableWipItems"), Config.ENABLE_WIP_ITEMS.get())
                 .setDefaultValue(true)
-                .setTooltip(Component.literal("Enables Work In Progress items in the creative tab and JEI/EMI"))
+                .setTooltip(Component.translatable("steamcore.configuration.enableWipItems.tooltip"))
                 .setSaveConsumer(Config.ENABLE_WIP_ITEMS::set)
                 .build());
 

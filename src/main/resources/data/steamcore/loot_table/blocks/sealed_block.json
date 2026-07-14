@@ -5,28 +5,28 @@
     {
       "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "name": "steamcore:unfinished_engineering_press" }
+        { "type": "minecraft:item", "name": "ae2:engineering_processor_press" }
       ]
     },
 
     {
       "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "name": "steamcore:unfinished_silicon_press" }
+        { "type": "minecraft:item", "name": "ae2:silicon_press" }
       ]
     },
 
     {
       "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "name": "steamcore:unfinished_logic_press" }
+        { "type": "minecraft:item", "name": "ae2:logic_processor_press" }
       ]
     },
 
     {
       "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "name": "steamcore:unfinished_calculation_press" }
+        { "type": "minecraft:item", "name": "ae2:calculation_processor_press" }
       ]
     }
 

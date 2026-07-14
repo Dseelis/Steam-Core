@@ -1,7 +1,21 @@
 {
   "replace": false,
   "values": [
-    "#relics:relics",
-    "#artifacts:artifacts"
+    {
+      "id": "#relics:relics",
+      "required": false
+    },
+    {
+      "id": "#artifacts:artifacts",
+      "required": false
+    },
+    {
+      "id": "#enigmaticlegacy:relics",
+      "required": false
+    },
+    {
+      "id": "#enigmaticlegacy:curios/relics",
+      "required": false
+    }
   ]
 }

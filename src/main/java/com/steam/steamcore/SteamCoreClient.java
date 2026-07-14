@@ -31,5 +31,7 @@ public class SteamCoreClient {
                 com.steam.steamcore.client.gui.DisassemblyTableScreen::new);
         event.register(com.steam.steamcore.registry.ModMenuTypes.ETERNAL_INFUSER_MENU.get(),
                 com.steam.steamcore.client.gui.EternalInfuserScreen::new);
+        event.register(com.steam.steamcore.registry.ModMenuTypes.ENGINEERING_TABLE_MENU.get(),
+                com.steam.steamcore.client.gui.EngineeringTableScreen::new);
     }
 }

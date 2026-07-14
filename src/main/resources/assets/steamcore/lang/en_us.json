@@ -7,6 +7,7 @@
   "item.steamcore.empty_eternal_gem": "Empty Eternal Gem",
   "block.steamcore.gamma_brick": "Gamma Brick",
   "block.steamcore.disassembly_table": "Disassembly Table",
+  "block.steamcore.engineering_table": "Engineering Table",
   "block.steamcore.kinetic_generator": "Kinetic Generator",
   "item.steamcore.wrench": "Wrench",
   "item.steamcore.forgotten_essence": "Forgotten Essence",
@@ -31,7 +32,9 @@
   "steamcore.configuration.debug": "Debug functions",
   "steamcore.configuration.dev": "Developer Tools",
   "steamcore.configuration.enableWipItems": "Enable WIP Items",
+  "steamcore.configuration.enableWipItems.tooltip": "Enables Work In Progress items in the creative tab and JEI/EMI",
   "steamcore.configuration.showIntroMessages": "Show Intro Message",
+  "steamcore.configuration.showIntroMessages.tooltip": "Shows story messages in chat when joining a world. (Not ready)",
   "steamcore.configuration.enableSteamDebugCommand": "/steamdebug command",
   "steamcore.configuration.enableSteamDebugCommand.tooltip": "Enables /steamdebug. Commands: info, ping, abysstp, setenergy, packinfo, modlist.",
   "steamcore.configuration.enableAbyss": "Enable Abyss (WIP)",
@@ -42,5 +45,10 @@
   "steamcore.configuration.abyssHeight.tooltip": "The Y level at which the player is consumed by the Abyss.",
   "steamcore.configuration.abyssDamage": "Abyss Damage (WIP)",
   "steamcore.configuration.abyssDamage.tooltip": "Amount of magic damage dealt to the player before teleportation.",
-  "steamcore.configuration.enablePortals": "Enable Vanilla Portals"
+  "steamcore.configuration.enablePortals": "Enable Vanilla Portals",
+  "steamcore.configuration.enablePortals.tooltip": "Allows the creation of Nether portals. If false, portals cannot be lit.",
+  "steamcore.configuration.enableDisassemblySound": "Enable Disassembly Sound",
+  "steamcore.subtitle.disassemble": "Item disassembled",
+  "gui.steamcore.engineering_table.attach": "Attach Goggles",
+  "gui.steamcore.engineering_table.detach": "Detach Goggles"
 }

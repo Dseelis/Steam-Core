@@ -3,6 +3,7 @@ package com.steam.steamcore.registry;
 import com.steam.steamcore.SteamCore;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -36,6 +37,9 @@ public class ModItems {
     public static final DeferredItem<BlockItem> KINETIC_GENERATOR_ITEM =
             ITEMS.registerSimpleBlockItem("kinetic_generator", ModBlocks.KINETIC_GENERATOR);
 
+    public static final DeferredItem<BlockItem> ENGINEERING_TABLE_ITEM =
+            ITEMS.registerSimpleBlockItem("engineering_table", ModBlocks.ENGINEERING_TABLE);
+
     // Items
 
     public static final DeferredItem<Item> UNFINISHED_CALCULATION_PRESS =
@@ -52,7 +56,7 @@ public class ModItems {
 
     public static final DeferredItem<Item> WRENCH =
             ITEMS.register("wrench",
-                    () -> new Item(new Item.Properties().stacksTo(1)));
+                    () -> new com.steam.steamcore.item.WrenchItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> FORGOTTEN_ESSENCE =
             ITEMS.registerSimpleItem("forgotten_essence");

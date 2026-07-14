@@ -20,6 +20,9 @@ public class ModMenuTypes {
     public static final Supplier<MenuType<com.steam.steamcore.inventory.EternalInfuserMenu>> ETERNAL_INFUSER_MENU =
             registerMenuType("eternal_infuser", com.steam.steamcore.inventory.EternalInfuserMenu::new);
 
+    public static final Supplier<MenuType<com.steam.steamcore.inventory.EngineeringTableMenu>> ENGINEERING_TABLE_MENU =
+            registerMenuType("engineering_table", com.steam.steamcore.inventory.EngineeringTableMenu::new);
+
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }

@@ -2,10 +2,13 @@ modLoader="javafml"
 loaderVersion="[4,)"
 license="Steamcreate2 Mod Custom License"
 
+[[mixins]]
+config="steamcore.mixins.json"
+
 [[mods]]
 modId="steamcore"
 logoFile="icon.png"
-version="1.1.3b"
+version="1.1.4b"
 description='''coremod for steamcore modpack.'''
 displayName="Steamcore"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/steamcore"
