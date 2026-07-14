@@ -1,3 +1,7 @@
+# [steamcore-1.1.5b-neoforge-1.21.1] - 14.07.2026
+- engineering table recipe fix
+- Icon update
+
 # [steamcore-1.1.4b-neoforge-1.21.1] - 14.07.2026
 - KubeJS integration for some stuff
 - New WIP Items 
