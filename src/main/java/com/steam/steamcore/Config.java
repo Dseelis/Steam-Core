@@ -8,6 +8,7 @@ public class Config {
 
     // GENERAL
     public static final ModConfigSpec.BooleanValue SHOW_INTRO_MESSAGES;
+    public static final ModConfigSpec.BooleanValue SHOW_MENU_BUTTON;
     public static final ModConfigSpec.BooleanValue ENABLE_ABYSS;
     public static final ModConfigSpec.IntValue ABYSS_HEIGHT;
     public static final ModConfigSpec.IntValue ABYSS_DAMAGE;
@@ -29,6 +30,10 @@ public class Config {
         SHOW_INTRO_MESSAGES = BUILDER
                 .comment("Show intro messages when entering the world")
                 .define("showIntroMessages", false);
+
+        SHOW_MENU_BUTTON = BUILDER
+                .comment("Show the SteamCreate 2 info button on the main menu")
+                .define("showMenuButton", true);
 
         ENABLE_PORTALS = BUILDER
                 .comment("Allow Nether portals")

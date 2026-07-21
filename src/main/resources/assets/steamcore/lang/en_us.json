@@ -48,7 +48,20 @@
   "steamcore.configuration.enablePortals": "Enable Vanilla Portals",
   "steamcore.configuration.enablePortals.tooltip": "Allows the creation of Nether portals. If false, portals cannot be lit.",
   "steamcore.configuration.enableDisassemblySound": "Enable Disassembly Sound",
+  "steamcore.configuration.showMenuButton": "Show Pack Info Button",
+  "steamcore.configuration.showMenuButton.tooltip": "Shows the SteamCreate 2 info button on the main menu",
   "steamcore.subtitle.disassemble": "Item disassembled",
   "gui.steamcore.engineering_table.attach": "Attach Goggles",
-  "gui.steamcore.engineering_table.detach": "Detach Goggles"
+  "gui.steamcore.engineering_table.detach": "Detach Goggles",
+  "steamcore.menu.button": "SteamCreate 2",
+  "steamcore.menu.button.tooltip": "Open SteamCreate 2 modpack info",
+  "steamcore.packinfo.title": "SteamCreate 2 — Pack Info",
+  "steamcore.packinfo.github": "GitHub",
+  "steamcore.packinfo.curseforge": "CurseForge",
+  "steamcore.packinfo.changelog": "Changelog",
+  "steamcore.packinfo.loading": "Loading...",
+  "steamcore.packinfo.checking": "Checking for updates...",
+  "steamcore.packinfo.up_to_date": "Up to date",
+  "steamcore.packinfo.update_available": "Update available!",
+  "steamcore.packinfo.no_connection": "No connection"
 }

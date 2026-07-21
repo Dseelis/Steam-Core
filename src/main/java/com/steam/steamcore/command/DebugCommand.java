@@ -187,8 +187,8 @@ public class DebugCommand {
         Path file = dir.resolve("packinfo.json");
 
         Map<String, Object> data = new LinkedHashMap<>();
-        data.put("packName",    SteamCore.PACK_NAME);
-        data.put("packVersion", SteamCore.PACK_VERSION);
+        data.put("packName",    SteamCore.getPackName());
+        data.put("packVersion", SteamCore.getPackVersion());
         data.put("minecraft",   SharedConstants.getCurrentVersion().getName());
         data.put("generatedAt", timestamp());
         data.put("modsCount",   ModList.get().getMods().size());
@@ -223,7 +223,7 @@ public class DebugCommand {
         Path file = dir.resolve("modlist.txt");
 
         try (BufferedWriter writer = Files.newBufferedWriter(file)) {
-            writer.write("Pack: " + SteamCore.PACK_NAME + " " + SteamCore.PACK_VERSION);
+            writer.write("Pack: " + SteamCore.getPackName() + " " + SteamCore.getPackVersion());
             writer.newLine();
             writer.write("Generated: " + timestamp());
             writer.newLine();

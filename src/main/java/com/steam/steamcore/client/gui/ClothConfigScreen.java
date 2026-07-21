@@ -24,6 +24,12 @@ public class ClothConfigScreen {
                 .setSaveConsumer(Config.SHOW_INTRO_MESSAGES::set)
                 .build());
 
+        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.showMenuButton"), Config.SHOW_MENU_BUTTON.get())
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.showMenuButton.tooltip"))
+                .setSaveConsumer(Config.SHOW_MENU_BUTTON::set)
+                .build());
+
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enablePortals"), Config.ENABLE_PORTALS.get())
                 .setDefaultValue(true)
                 .setTooltip(Component.translatable("steamcore.configuration.enablePortals.tooltip"))

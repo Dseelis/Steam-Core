@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-/**
- * Manager for KubeJS integration events.
- * Handles event firing and registration for custom disassembly and engineering table logic.
- */
+// Manager for KubeJS integration events.
+// Handles event firing and registration for custom disassembly and engineering table logic.
 public class SteamCoreKubeJSEvents {
 
     private static final List<Consumer<DisassemblyEvent>> disassemblyListeners = new ArrayList<>();
@@ -24,10 +22,8 @@ public class SteamCoreKubeJSEvents {
         kubeJSLoaded = ModList.get().isLoaded("kubejs");
     }
 
-    /**
-     * Fire a disassembly event.
-     * Returns the event after processing by all listeners.
-     */
+     // Fire a disassembly event.
+     // Returns the event after processing by all listeners.
     public static DisassemblyEvent fireDisassemblyEvent(Level level, ItemStack input) {
         DisassemblyEvent event = new DisassemblyEvent(level, input);
 
@@ -43,10 +39,8 @@ public class SteamCoreKubeJSEvents {
         return event;
     }
 
-    /**
-     * Fire an engineering table event.
-     * Returns the event after processing by all listeners.
-     */
+     // Fire an engineering table event.
+     // Returns the event after processing by all listeners.
     public static EngineeringTableEvent fireEngineeringTableEvent(Level level, ItemStack helmet, ItemStack goggles, EngineeringTableEvent.Type type) {
         EngineeringTableEvent event = new EngineeringTableEvent(level, helmet, goggles, type);
 
@@ -62,30 +56,22 @@ public class SteamCoreKubeJSEvents {
         return event;
     }
 
-    /**
-     * Register a disassembly event listener (for KubeJS)
-     */
+     // Register a disassembly event listener (for KubeJS)
     public static void registerDisassemblyListener(Consumer<DisassemblyEvent> listener) {
         disassemblyListeners.add(listener);
     }
 
-    /**
-     * Register an engineering table event listener (for KubeJS)
-     */
+     // Register an engineering table event listener (for KubeJS)
     public static void registerEngineeringListener(Consumer<EngineeringTableEvent> listener) {
         engineeringListeners.add(listener);
     }
 
-    /**
-     * Check if KubeJS is loaded
-     */
+     // Check if KubeJS is loaded
     public static boolean isKubeJSLoaded() {
         return kubeJSLoaded;
     }
 
-    /**
-     * Clear all listeners (for testing or reload)
-     */
+     // Clear all listeners (for testing or reload)
     public static void clearListeners() {
         disassemblyListeners.clear();
         engineeringListeners.clear();

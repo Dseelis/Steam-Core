@@ -48,7 +48,20 @@
   "steamcore.configuration.enablePortals": "Включить ванильные порталы",
   "steamcore.configuration.enablePortals.tooltip": "Разрешает создание порталов в Незер. Если отключено, порталы нельзя будет зажечь.",
   "steamcore.configuration.enableDisassemblySound": "Включить звук стола разборки",
+  "steamcore.configuration.showMenuButton": "Показать кнопку информации о паке",
+  "steamcore.configuration.showMenuButton.tooltip": "Показывает кнопку SteamCreate 2 в главном меню",
   "steamcore.subtitle.disassemble": "Предмет разобран",
   "gui.steamcore.engineering_table.attach": "Прикрепить очки",
-  "gui.steamcore.engineering_table.detach": "Снять очки"
+  "gui.steamcore.engineering_table.detach": "Снять очки",
+  "steamcore.menu.button": "SteamCreate 2",
+  "steamcore.menu.button.tooltip": "Открыть информацию о модпаке SteamCreate 2",
+  "steamcore.packinfo.title": "SteamCreate 2 — Информация о паке",
+  "steamcore.packinfo.github": "GitHub",
+  "steamcore.packinfo.curseforge": "CurseForge",
+  "steamcore.packinfo.changelog": "История изменений",
+  "steamcore.packinfo.loading": "Загрузка...",
+  "steamcore.packinfo.checking": "Проверка обновлений...",
+  "steamcore.packinfo.up_to_date": "Актуальная версия",
+  "steamcore.packinfo.update_available": "Доступно обновление!",
+  "steamcore.packinfo.no_connection": "Нет подключения"
 }
