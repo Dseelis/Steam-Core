@@ -1,5 +1,6 @@
 package com.steam.steamcore.client.gui;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.SteamCore;
 import com.steam.steamcore.client.util.GitHubDataFetcher;
 import net.minecraft.Util;
@@ -73,9 +74,25 @@ public class PackInfoScreen extends Screen {
         changelogY   = 38;
         changelogH   = height - changelogY - 30;
 
+        // Notification toggle button on left panel
+        int toggleW = Math.min(dividerX - 20, 140);
+        int toggleX = (dividerX - toggleW) / 2;
+        int toggleY = height - 85;
+
+        addRenderableWidget(Button.builder(
+                        getNotificationButtonMessage(),
+                        btn -> {
+                            boolean newVal = !Config.ENABLE_UPDATE_NOTIFICATIONS.get();
+                            Config.ENABLE_UPDATE_NOTIFICATIONS.set(newVal);
+                            Config.SPEC.save();
+                            btn.setMessage(getNotificationButtonMessage());
+                        })
+                .bounds(toggleX, toggleY, toggleW, 20)
+                .build());
+
         // Left panel buttons
-        int btnW = Math.min(dividerX - 20, 130);
-        int btnX = 10;
+        int btnW = Math.min(dividerX - 20, 140);
+        int btnX = (dividerX - btnW) / 2;
         int btnY = height - 60;
 
         addRenderableWidget(Button.builder(
@@ -95,6 +112,14 @@ public class PackInfoScreen extends Screen {
                         btn -> onClose())
                 .bounds(width / 2 - 60, height - 26, 120, 20)
                 .build());
+    }
+
+    private Component getNotificationButtonMessage() {
+        return Component.translatable("steamcore.packinfo.notifications")
+                .append(": ")
+                .append(Config.ENABLE_UPDATE_NOTIFICATIONS.get()
+                        ? Component.translatable("options.on")
+                        : Component.translatable("options.off"));
     }
 
     // Render
@@ -126,8 +151,7 @@ public class PackInfoScreen extends Screen {
         int cx = dividerX / 2;
         int y  = 20;
 
-        // Icon
-        gfx.blit(ICON_TEXTURE, cx - 16, y, 0, 0, 32, 32, 32, 32);
+        gfx.blit(ICON_TEXTURE, cx - 16, y, 32, 32, 0f, 0f, 16, 16, 16, 16);
         y += 40;
 
         // Pack name

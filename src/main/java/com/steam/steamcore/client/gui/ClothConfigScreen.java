@@ -30,6 +30,12 @@ public class ClothConfigScreen {
                 .setSaveConsumer(Config.SHOW_MENU_BUTTON::set)
                 .build());
 
+        general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableUpdateNotifications"), Config.ENABLE_UPDATE_NOTIFICATIONS.get())
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.enableUpdateNotifications.tooltip"))
+                .setSaveConsumer(Config.ENABLE_UPDATE_NOTIFICATIONS::set)
+                .build());
+
         general.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enablePortals"), Config.ENABLE_PORTALS.get())
                 .setDefaultValue(true)
                 .setTooltip(Component.translatable("steamcore.configuration.enablePortals.tooltip"))

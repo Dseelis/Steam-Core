@@ -5,8 +5,10 @@ import com.steam.steamcore.SteamCore;
 import com.steam.steamcore.client.gui.PackInfoScreen;
 import com.steam.steamcore.client.util.GitHubDataFetcher;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.client.gui.screens.TitleScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -15,57 +17,77 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ScreenEvent;
 
-/**
- * Injects a small 16×16 icon button to the right of the Multiplayer button
- * on the vanilla TitleScreen. Controlled by {@code Config.SHOW_MENU_BUTTON}.
- */
 @EventBusSubscriber(modid = SteamCore.MODID, value = Dist.CLIENT)
 public class MainMenuButtonEvent {
 
-    /** The button sprite — matches the 16×16 texture we ship. */
     private static final ResourceLocation BUTTON_ICON =
-            ResourceLocation.fromNamespaceAndPath(SteamCore.MODID, "textures/screens/pack_info_icon.png");
+            ResourceLocation.fromNamespaceAndPath(SteamCore.MODID, "textures/screens/pack_button_preview.png");
 
-    /** Gap (in pixels) between the right edge of the Multiplayer button and our icon. */
     private static final int GAP = 4;
+    private static boolean updateToastShown = false;
 
     @SubscribeEvent
     public static void onScreenInit(ScreenEvent.Init.Post event) {
         if (!(event.getScreen() instanceof TitleScreen titleScreen)) return;
-        if (!Config.SHOW_MENU_BUTTON.get()) return;
 
-        // Kick off the async GitHub fetch as early as possible
+        // Kick off fetch as early as possible
         GitHubDataFetcher.startFetchIfNeeded();
+
+        checkAndUpdateToast();
+
+        if (!Config.SHOW_MENU_BUTTON.get()) return;
 
         Minecraft mc = Minecraft.getInstance();
         int screenW  = titleScreen.width;
         int screenH  = titleScreen.height;
 
-        // Vanilla TitleScreen lays out its main buttons as a column centred at
-        // (width/2) with width=200 and starting Y around height/4+48.
-        // The Multiplayer button is the 3rd button (index 2) in that group.
-        // We replicate the same Y calculation and place our icon immediately
-        // to the right of the button block (width/2 + 100 + gap).
-
         int buttonColW = 200;
-        int buttonX    = screenW / 2 - buttonColW / 2;          // left edge of button column
-        int multiY     = screenH / 4 + 48 + 24;                 // Y of the "Multiplayer" button (same as vanilla)
+        int buttonX    = screenW / 2 - buttonColW / 2;
+        int multiY     = screenH / 4 + 48 + 24;
 
-        // Our icon sits to the right: (buttonX + buttonColW + gap), vertically centred on the button (height 20)
         int iconX = buttonX + buttonColW + GAP;
-        int iconY = multiY + (20 - 16) / 2;                     // centre 16px in 20px-tall button row
+        int iconY = multiY - 12;
 
-        ImageButton btn = new ImageButton(
-                iconX, iconY, 16, 16,
-                // WidgetSprites: normal, highlighted  — we use the same texture for both
-                new net.minecraft.client.gui.components.WidgetSprites(
-                        BUTTON_ICON, BUTTON_ICON
-                ),
-                b -> mc.setScreen(new PackInfoScreen(titleScreen)),
-                Component.translatable("steamcore.menu.button")
+        PackInfoButton btn = new PackInfoButton(iconX, iconY, 20, 20,
+                Component.empty(),
+                b -> mc.setScreen(new PackInfoScreen(titleScreen))
         );
         btn.setTooltip(Tooltip.create(Component.translatable("steamcore.menu.button.tooltip")));
 
         event.addListener(btn);
+    }
+
+    public static void checkAndUpdateToast() {
+        if (updateToastShown) return;
+        if (!Config.ENABLE_UPDATE_NOTIFICATIONS.get()) return;
+
+        if (GitHubDataFetcher.getReleaseStatus() == GitHubDataFetcher.Status.DONE
+                && GitHubDataFetcher.isUpdateAvailable()) {
+            updateToastShown = true;
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.getToasts() != null) {
+                SystemToast.add(
+                        mc.getToasts(),
+                        SystemToast.SystemToastId.NARRATOR_TOGGLE,
+                        Component.translatable("steamcore.update.toast.title"),
+                        Component.translatable("steamcore.update.toast.message")
+                );
+            }
+        }
+    }
+
+    private static class PackInfoButton extends Button {
+        public PackInfoButton(int x, int y, int width, int height, Component message, Button.OnPress onPress) {
+            super(x, y, width, height, message, onPress, DEFAULT_NARRATION);
+        }
+
+        @Override
+        public void renderWidget(GuiGraphics gfx, int mouseX, int mouseY, float partialTick) {
+            super.renderWidget(gfx, mouseX, mouseY, partialTick);
+
+            int drawX = getX() + 2;
+            int drawY = getY() + 2;
+            gfx.blit(BUTTON_ICON, drawX, drawY, 0f, 0f, 16, 16, 16, 16);
+        }
     }
 }

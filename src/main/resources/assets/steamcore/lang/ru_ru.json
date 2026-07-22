@@ -50,11 +50,13 @@
   "steamcore.configuration.enableDisassemblySound": "Включить звук стола разборки",
   "steamcore.configuration.showMenuButton": "Показать кнопку информации о паке",
   "steamcore.configuration.showMenuButton.tooltip": "Показывает кнопку SteamCreate 2 в главном меню",
+  "steamcore.configuration.enableUpdateNotifications": "Включить уведомления об обновлениях",
+  "steamcore.configuration.enableUpdateNotifications.tooltip": "Показывать всплывающее уведомление при наличии обновления сборки",
   "steamcore.subtitle.disassemble": "Предмет разобран",
   "gui.steamcore.engineering_table.attach": "Прикрепить очки",
   "gui.steamcore.engineering_table.detach": "Снять очки",
   "steamcore.menu.button": "SteamCreate 2",
-  "steamcore.menu.button.tooltip": "Открыть информацию о модпаке SteamCreate 2",
+  "steamcore.menu.button.tooltip": "Открыть меню Steamcreate2",
   "steamcore.packinfo.title": "SteamCreate 2 — Информация о паке",
   "steamcore.packinfo.github": "GitHub",
   "steamcore.packinfo.curseforge": "CurseForge",
@@ -63,5 +65,8 @@
   "steamcore.packinfo.checking": "Проверка обновлений...",
   "steamcore.packinfo.up_to_date": "Актуальная версия",
   "steamcore.packinfo.update_available": "Доступно обновление!",
-  "steamcore.packinfo.no_connection": "Нет подключения"
+  "steamcore.packinfo.no_connection": "Нет подключения",
+  "steamcore.packinfo.notifications": "Уведомления",
+  "steamcore.update.toast.title": "SteamCreate 2",
+  "steamcore.update.toast.message": "Доступно обновление сборки!"
 }

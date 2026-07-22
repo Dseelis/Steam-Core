@@ -9,6 +9,7 @@ public class Config {
     // GENERAL
     public static final ModConfigSpec.BooleanValue SHOW_INTRO_MESSAGES;
     public static final ModConfigSpec.BooleanValue SHOW_MENU_BUTTON;
+    public static final ModConfigSpec.BooleanValue ENABLE_UPDATE_NOTIFICATIONS;
     public static final ModConfigSpec.BooleanValue ENABLE_ABYSS;
     public static final ModConfigSpec.IntValue ABYSS_HEIGHT;
     public static final ModConfigSpec.IntValue ABYSS_DAMAGE;
@@ -34,6 +35,10 @@ public class Config {
         SHOW_MENU_BUTTON = BUILDER
                 .comment("Show the SteamCreate 2 info button on the main menu")
                 .define("showMenuButton", true);
+
+        ENABLE_UPDATE_NOTIFICATIONS = BUILDER
+                .comment("Show update notifications when a new version is available")
+                .define("enableUpdateNotifications", true);
 
         ENABLE_PORTALS = BUILDER
                 .comment("Allow Nether portals")
