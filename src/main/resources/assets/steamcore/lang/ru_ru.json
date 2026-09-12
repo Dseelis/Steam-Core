@@ -55,6 +55,7 @@
   "steamcore.subtitle.disassemble": "Предмет разобран",
   "gui.steamcore.engineering_table.attach": "Прикрепить очки",
   "gui.steamcore.engineering_table.detach": "Снять очки",
+  "tooltip.steamcore.goggles_attached": "Инженерные очки надеты",
   "steamcore.menu.button": "SteamCreate 2",
   "steamcore.menu.button.tooltip": "Открыть меню Steamcreate2",
   "steamcore.packinfo.title": "SteamCreate 2 — Информация о паке",
@@ -68,5 +69,10 @@
   "steamcore.packinfo.no_connection": "Нет подключения",
   "steamcore.packinfo.notifications": "Уведомления",
   "steamcore.update.toast.title": "SteamCreate 2",
-  "steamcore.update.toast.message": "Доступно обновление сборки!"
+  "steamcore.update.toast.message": "Доступно обновление сборки!",
+  "item.steamcore.incomplete_blaze_rod": "Incomplete Blaze Rod",
+  "item.steamcore.coal_rod": "Coal Rod",
+  "item.steamcore.ectoplasm": "Ectoplasm",
+  "item.steamcore.incomplete_netherite_upgrade_smithing_template": "Incomplete Smithing Template",
+  "item.steamcore.netherite_fragment": "Netherite Fragment"
 }
