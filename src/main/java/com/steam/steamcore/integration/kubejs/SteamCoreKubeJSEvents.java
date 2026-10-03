@@ -27,6 +27,8 @@ public class SteamCoreKubeJSEvents {
     public static DisassemblyEvent fireDisassemblyEvent(Level level, ItemStack input) {
         DisassemblyEvent event = new DisassemblyEvent(level, input);
 
+        dispatchKubeJS("disassembly", event);
+
         // Fire to custom listeners (for KubeJS)
         for (Consumer<DisassemblyEvent> listener : disassemblyListeners) {
             try {
@@ -42,7 +44,13 @@ public class SteamCoreKubeJSEvents {
      // Fire an engineering table event.
      // Returns the event after processing by all listeners.
     public static EngineeringTableEvent fireEngineeringTableEvent(Level level, ItemStack helmet, ItemStack goggles, EngineeringTableEvent.Type type) {
-        EngineeringTableEvent event = new EngineeringTableEvent(level, helmet, goggles, type);
+        return fireEngineeringTableEvent(level, helmet, goggles, ItemStack.EMPTY, type);
+    }
+
+    public static EngineeringTableEvent fireEngineeringTableEvent(Level level, ItemStack helmet, ItemStack goggles, ItemStack spyglass, EngineeringTableEvent.Type type) {
+        EngineeringTableEvent event = new EngineeringTableEvent(level, helmet, goggles, spyglass, type);
+
+        dispatchKubeJS("engineeringTable", event);
 
         // Fire to custom listeners (for KubeJS)
         for (Consumer<EngineeringTableEvent> listener : engineeringListeners) {
@@ -69,6 +77,16 @@ public class SteamCoreKubeJSEvents {
      // Check if KubeJS is loaded
     public static boolean isKubeJSLoaded() {
         return kubeJSLoaded;
+    }
+
+    private static void dispatchKubeJS(String eventName, Object event) {
+        if (!kubeJSLoaded) return;
+        try {
+            Class<?> plugin = Class.forName("com.steam.steamcore.integration.kubejs.SteamCoreKubeJSPlugin");
+            plugin.getMethod("post", String.class, Object.class).invoke(null, eventName, event);
+        } catch (ReflectiveOperationException e) {
+            SteamCore.LOGGER.error("Could not dispatch SteamCore KubeJS event {}", eventName, e);
+        }
     }
 
      // Clear all listeners (for testing or reload)

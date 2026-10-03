@@ -1,0 +1,1 @@
+com.steam.steamcore.integration.kubejs.SteamCoreKubeJSPlugin

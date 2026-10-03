@@ -46,7 +46,7 @@ SteamCoreEvents.disassembly(event => {
 
 ### Engineering Table Event
 
-Fired when goggles are being attached to or detached from a helmet in the Engineering Table.
+Fired when goggles or a spyglass are being installed into or removed from a helmet in the Engineering Table.
 
 **Event Type:** `EngineeringTableEvent`
 
@@ -57,6 +57,7 @@ Fired when goggles are being attached to or detached from a helmet in the Engine
 SteamCoreEvents.engineeringTable(event => {
     let helmet = event.getHelmet();
     let goggles = event.getGoggles();
+    let spyglass = event.getSpyglass(); // Empty when no spyglass is being installed or removed
     
     // Only allow attaching goggles to diamond helmets
     if (event.isAttach() && helmet.id !== 'minecraft:diamond_helmet') {
@@ -74,6 +75,7 @@ SteamCoreEvents.engineeringTable(event => {
 - `getLevel()` - Get the world/level
 - `getHelmet()` - Get the helmet ItemStack
 - `getGoggles()` - Get the goggles ItemStack (may be empty for detach)
+- `getSpyglass()` - Get the spyglass ItemStack (may be empty when unused)
 - `getType()` - Get operation type (ATTACH or DETACH)
 - `isAttach()` - Check if this is an attach operation
 - `isDetach()` - Check if this is a detach operation

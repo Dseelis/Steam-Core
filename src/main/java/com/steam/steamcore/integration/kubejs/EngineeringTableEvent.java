@@ -9,14 +9,20 @@ public class EngineeringTableEvent {
     private final Level level;
     private final ItemStack helmet;
     private final ItemStack goggles;
+    private final ItemStack spyglass;
     private final Type type;
     private boolean cancelled = false;
     private String cancelMessage = "";
 
     public EngineeringTableEvent(Level level, ItemStack helmet, ItemStack goggles, Type type) {
+        this(level, helmet, goggles, ItemStack.EMPTY, type);
+    }
+
+    public EngineeringTableEvent(Level level, ItemStack helmet, ItemStack goggles, ItemStack spyglass, Type type) {
         this.level = level;
         this.helmet = helmet;
         this.goggles = goggles;
+        this.spyglass = spyglass;
         this.type = type;
     }
 
@@ -38,6 +44,10 @@ public class EngineeringTableEvent {
      // Get the goggles item (may be empty for DETACH operations)
     public ItemStack getGoggles() {
         return goggles;
+    }
+
+    public ItemStack getSpyglass() {
+        return spyglass;
     }
 
      // Get the type of operation (ATTACH or DETACH)

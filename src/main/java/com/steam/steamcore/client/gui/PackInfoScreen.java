@@ -25,18 +25,18 @@ public class PackInfoScreen extends Screen {
     private static final String URL_CURSEFORGE = "https://www.curseforge.com/minecraft/modpacks/steamcreate2";
 
     // Colours
-    private static final int COL_BG_LEFT    = 0xFF1A1A2E;
-    private static final int COL_BG_RIGHT   = 0xFF16213E;
-    private static final int COL_PANEL      = 0xCC0F3460;
-    private static final int COL_BORDER     = 0xFF533483;
-    private static final int COL_TITLE      = 0xFFE8C96A; // gold
-    private static final int COL_VERSION    = 0xFFAAAAAA;
-    private static final int COL_TEXT       = 0xFFCCCCCC;
-    private static final int COL_UPDATE_OK  = 0xFF55FF55;
-    private static final int COL_UPDATE_NEW = 0xFFFFAA00;
-    private static final int COL_HEADING    = 0xFFE8C96A;
-    private static final int COL_SCROLL_BG  = 0x55000000;
-    private static final int COL_SCROLL_BAR = 0xFF533483;
+    private static final int COL_BG_LEFT    = 0xFF3C3836;
+    private static final int COL_BG_RIGHT   = 0xFF282522;
+    private static final int COL_PANEL      = 0xCC504945;
+    private static final int COL_BORDER     = SteamCoreGuiStyle.BRASS_DARK;
+    private static final int COL_TITLE      = SteamCoreGuiStyle.TEXT;
+    private static final int COL_VERSION    = SteamCoreGuiStyle.TEXT_MUTED;
+    private static final int COL_TEXT       = SteamCoreGuiStyle.TEXT;
+    private static final int COL_UPDATE_OK  = 0xFFA9B665;
+    private static final int COL_UPDATE_NEW = SteamCoreGuiStyle.BRASS;
+    private static final int COL_HEADING    = SteamCoreGuiStyle.BRASS;
+    private static final int COL_SCROLL_BG  = 0xAA1D2021;
+    private static final int COL_SCROLL_BAR = SteamCoreGuiStyle.BRASS_DARK;
 
     private static final int DIVIDER_X_RATIO = 40; // left panel = 40% of width
 
@@ -138,7 +138,7 @@ public class PackInfoScreen extends Screen {
         gfx.fillGradient(dividerX, 0, w, h, COL_BG_RIGHT, 0xFF0A1628);
 
         // Vertical divider line
-        gfx.fill(dividerX, 0, dividerX + 1, h, COL_BORDER);
+        gfx.fill(dividerX - 1, 0, dividerX + 2, h, COL_BORDER);
 
         // Panel content
         renderLeftPanel(gfx, mouseX, mouseY);
@@ -150,6 +150,9 @@ public class PackInfoScreen extends Screen {
     private void renderLeftPanel(GuiGraphics gfx, int mouseX, int mouseY) {
         int cx = dividerX / 2;
         int y  = 20;
+
+        gfx.fill(8, 8, dividerX - 8, height - 92, COL_PANEL);
+        gfx.renderOutline(8, 8, dividerX - 16, height - 100, COL_BORDER);
 
         gfx.blit(ICON_TEXTURE, cx - 16, y, 32, 32, 0f, 0f, 16, 16, 16, 16);
         y += 40;
@@ -200,6 +203,9 @@ public class PackInfoScreen extends Screen {
 
     private void renderRightPanel(GuiGraphics gfx, int mouseX, int mouseY) {
         int px = rightPanelX, py = 10, pw = rightPanelW;
+
+        gfx.fill(px - 4, py - 2, px + pw, height - 28, COL_PANEL);
+        gfx.renderOutline(px - 4, py - 2, pw + 4, height - 36, COL_BORDER);
 
         // Section heading
         gfx.drawString(font, getLang("steamcore.packinfo.changelog"), px, py, COL_HEADING, false);
@@ -260,20 +266,20 @@ public class PackInfoScreen extends Screen {
                 color = COL_HEADING;
                 content = trimmed.substring(2);
             } else if (trimmed.startsWith("## ")) {
-                color = 0xFFBBBBFF;
+                color = SteamCoreGuiStyle.TEXT_MUTED;
                 content = trimmed.substring(3);
             } else if (trimmed.startsWith("### ")) {
-                color = 0xFF88D0FF;
+                color = SteamCoreGuiStyle.BRASS;
                 content = trimmed.substring(4);
             } else if (trimmed.startsWith("#### ")) {
-                color = 0xFFAAD0FF;
+                color = SteamCoreGuiStyle.TEXT_MUTED;
                 content = trimmed.substring(5);
             } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
                 color = 0xFFCCCCCC;
             } else if (trimmed.startsWith("//")) {
-                color = 0xFF777777;
+                color = 0xFF928374;
             } else if (trimmed.startsWith("(temp)")) {
-                color = 0xFFCCCC66;
+                color = SteamCoreGuiStyle.BRASS;
             }
 
             List<net.minecraft.util.FormattedCharSequence> wrapped =

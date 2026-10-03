@@ -37,6 +37,10 @@ public class DisassemblyEvent {
         this.cancelled = true;
     }
 
+    public void setCancelled(boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
     // Set custom outputs for this disassembly
     public void setCustomOutputs(ItemStack... outputs) {
         this.customOutputs = outputs;

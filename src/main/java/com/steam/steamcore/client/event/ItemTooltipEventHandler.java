@@ -22,15 +22,19 @@ public class ItemTooltipEventHandler {
             return;
         }
 
-        if (stack.getOrDefault(ModDataComponents.HAS_GOGGLES.get(), false)) {
+        boolean hasUpgrades = stack.getOrDefault(ModDataComponents.HAS_GOGGLES.get(), false)
+                || stack.getOrDefault(ModDataComponents.HAS_SPYGLASS.get(), false)
+                || stack.getOrDefault(ModDataComponents.PRESSED_IRON_ARMOR.get(), false)
+                || stack.getOrDefault(ModDataComponents.STEEL_TOUGHNESS.get(), false);
+        if (hasUpgrades) {
             List<Component> tooltip = event.getToolTip();
-            Component gogglesComponent = Component.translatable("tooltip.steamcore.goggles_attached")
+            Component upgradesComponent = Component.translatable("tooltip.steamcore.upgrades_equipped")
                     .withStyle(ChatFormatting.GOLD);
 
             if (tooltip.isEmpty()) {
-                tooltip.add(gogglesComponent);
+                tooltip.add(upgradesComponent);
             } else {
-                tooltip.add(1, gogglesComponent);
+                tooltip.add(1, upgradesComponent);
             }
         }
     }

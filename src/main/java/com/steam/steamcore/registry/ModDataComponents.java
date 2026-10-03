@@ -17,4 +17,19 @@ public class ModDataComponents {
                             .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL)
                             .build()
             );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> HAS_SPYGLASS =
+            DATA_COMPONENT_TYPES.register("has_spyglass", () -> DataComponentType.<Boolean>builder()
+                    .persistent(com.mojang.serialization.Codec.BOOL)
+                    .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL).build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> PRESSED_IRON_ARMOR =
+            DATA_COMPONENT_TYPES.register("pressed_iron_armor", () -> DataComponentType.<Boolean>builder()
+                    .persistent(com.mojang.serialization.Codec.BOOL)
+                    .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL).build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> STEEL_TOUGHNESS =
+            DATA_COMPONENT_TYPES.register("steel_toughness", () -> DataComponentType.<Boolean>builder()
+                    .persistent(com.mojang.serialization.Codec.BOOL)
+                    .networkSynchronized(net.minecraft.network.codec.ByteBufCodecs.BOOL).build());
 }

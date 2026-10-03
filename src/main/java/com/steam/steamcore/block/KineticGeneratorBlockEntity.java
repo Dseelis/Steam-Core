@@ -4,6 +4,8 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.steam.steamcore.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -32,6 +34,9 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
         if (speed > 0) {
             int generated = (int) (speed * CONVERSION_RATE);
             energyStorage.addEnergyInternal(generated);
+            if (generated > 0) {
+                setChanged();
+            }
         }
 
         if (energyStorage.getEnergyStored() > 0) {
@@ -53,9 +58,29 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
                     );
 
                     energyStorage.extractEnergyInternal(sent);
+                    if (sent > 0) {
+                        setChanged();
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.write(tag, registries, clientPacket);
+        tag.putInt("Energy", energyStorage.getEnergyStored());
+    }
+
+    @Override
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        super.read(tag, registries, clientPacket);
+        energyStorage.setEnergyDirectly(tag.getInt("Energy"));
+    }
+
+    @Override
+    public float calculateStressApplied() {
+        return 8.0F;
     }
 
     public IEnergyStorage getEnergyStorage() {
@@ -84,6 +109,10 @@ public class KineticGeneratorBlockEntity extends KineticBlockEntity {
 
         public void addEnergyInternal(int amount) {
             this.energy = Math.min(capacity, this.energy + amount);
+        }
+
+        public void setEnergyDirectly(int amount) {
+            this.energy = Math.max(0, Math.min(capacity, amount));
         }
 
         public void extractEnergyInternal(int amount) {

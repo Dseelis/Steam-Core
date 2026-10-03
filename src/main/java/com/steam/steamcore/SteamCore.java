@@ -41,6 +41,8 @@ public class SteamCore {
         // Creative tab injection
         modEventBus.addListener(ModCreativeTabs::addCreative);
         modEventBus.addListener(com.steam.steamcore.block.KineticGeneratorBlockEntity::registerCapabilities);
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(
+                com.steam.steamcore.event.ArmorUpgradeHandler::onItemAttributeModifiers);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC, "steamcore/steamcore.toml");
 

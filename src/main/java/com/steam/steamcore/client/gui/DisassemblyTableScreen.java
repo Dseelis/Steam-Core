@@ -40,12 +40,7 @@ public class DisassemblyTableScreen extends AbstractContainerScreen<DisassemblyT
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        // Main background
-        guiGraphics.fill(this.leftPos, this.topPos, this.leftPos + this.imageWidth, this.topPos + this.imageHeight, 0xFFC6C6C6);
-
-        // Header section
-        guiGraphics.fill(this.leftPos, this.topPos, this.leftPos + this.imageWidth, this.topPos + 17, 0xFF8B8B8B);
-        guiGraphics.renderOutline(this.leftPos, this.topPos, this.imageWidth, this.imageHeight, 0xFF373737);
+        SteamCoreGuiStyle.drawFrame(guiGraphics, this.leftPos, this.topPos, this.imageWidth, this.imageHeight);
 
         // Input slot
         drawSlot(guiGraphics, this.leftPos + 120, this.topPos + 20);
@@ -53,8 +48,7 @@ public class DisassemblyTableScreen extends AbstractContainerScreen<DisassemblyT
         // Output slots
         int outputStartX = this.leftPos + 102;
         int outputStartY = this.topPos + 45;
-        guiGraphics.fill(outputStartX - 5, outputStartY - 5, outputStartX + 59, outputStartY + 41, 0xFF8B8B8B);
-        guiGraphics.renderOutline(outputStartX - 5, outputStartY - 5, 64, 46, 0xFF545454);
+        SteamCoreGuiStyle.drawPanel(guiGraphics, outputStartX - 5, outputStartY - 5, 64, 46);
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 3; j++) {
@@ -64,9 +58,13 @@ public class DisassemblyTableScreen extends AbstractContainerScreen<DisassemblyT
     }
 
     private void drawSlot(GuiGraphics graphics, int x, int y) {
-        // Lighter slot background
-        graphics.fill(x - 1, y - 1, x + 17, y + 17, 0xFF8B8B8B);
-        graphics.renderOutline(x - 1, y - 1, 18, 18, 0xFF545454);
+        SteamCoreGuiStyle.drawSlot(graphics, x, y);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
+        graphics.drawString(this.font, this.title, this.titleLabelX, this.titleLabelY, SteamCoreGuiStyle.TEXT, false);
+        graphics.drawString(this.font, this.playerInventoryTitle, this.inventoryLabelX, this.inventoryLabelY, SteamCoreGuiStyle.TEXT_MUTED, false);
     }
 
     @Override

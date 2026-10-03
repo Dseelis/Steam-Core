@@ -16,6 +16,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 public class SteamCoreClient {
     public SteamCoreClient(ModContainer container) {
         container.registerExtensionPoint(IConfigScreenFactory.class, (client, parent) -> ClothConfigScreen.create(parent));
+        com.steam.steamcore.client.compat.SpyglassImprovementsBridge.register();
     }
 
     @SubscribeEvent

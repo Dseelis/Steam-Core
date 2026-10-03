@@ -3,6 +3,7 @@ package com.steam.steamcore.item;
 import com.steam.steamcore.block.DisassemblyTableBlock;
 import com.steam.steamcore.block.EternalInfuserBlock;
 import com.steam.steamcore.block.KineticGeneratorBlock;
+import com.steam.steamcore.block.EngineeringTableBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -51,6 +52,7 @@ public class WrenchItem extends Item {
             Block block = state.getBlock();
 
             boolean isModMachine = block instanceof DisassemblyTableBlock 
+                    || block instanceof EngineeringTableBlock
                     || block instanceof EternalInfuserBlock 
                     || block instanceof KineticGeneratorBlock;
 
