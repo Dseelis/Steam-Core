@@ -3,6 +3,8 @@ package com.steam.steamcore.integration.kubejs;
 import com.steam.steamcore.SteamCore;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.LivingEntity;
 import net.neoforged.fml.ModList;
 
 import java.util.ArrayList;
@@ -62,6 +64,22 @@ public class SteamCoreKubeJSEvents {
         }
 
         return event;
+    }
+
+    public static MobLevelHookEvent fireMobLevelEvent(Level level, Mob mob, int proposedLevel) {
+        MobLevelHookEvent event = new MobLevelHookEvent(level, mob, proposedLevel);
+        dispatchKubeJS("mobLevel", event);
+        return event;
+    }
+
+    public static BossProgressHookEvent fireBossProgressEvent(Level level, LivingEntity boss, String bossId, int points) {
+        BossProgressHookEvent event = new BossProgressHookEvent(level, boss, bossId, points);
+        dispatchKubeJS("bossProgress", event);
+        return event;
+    }
+
+    public static void fireDialogueChoiceEvent(net.minecraft.server.level.ServerPlayer player, String dialogueId, String nodeId, String actionId) {
+        dispatchKubeJS("dialogueChoice", new DialogueChoiceHookEvent(player, dialogueId, nodeId, actionId));
     }
 
      // Register a disassembly event listener (for KubeJS)

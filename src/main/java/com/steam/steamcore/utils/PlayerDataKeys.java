@@ -7,6 +7,7 @@ public final class PlayerDataKeys {
     // Spawn / intro
     public static final String SPAWNED          = "steamcore_spawned";
     public static final String INTRO_SHOWN      = "steamcore_intro_shown";
+    public static final String INTRO_PENDING    = "steamcore_intro_pending";
 
     // Abyss system
     public static final String ABYSS_COOLDOWN   = "steamcore_abyss_cooldown";

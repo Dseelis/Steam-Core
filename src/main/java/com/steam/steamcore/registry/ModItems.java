@@ -79,6 +79,9 @@ public class ModItems {
     public static final DeferredItem<Item> ETERNAL_CORE =
             ITEMS.registerSimpleItem("eternal_core");
 
+    public static final DeferredItem<Item> MECHANIC_BEACON = ITEMS.register("mechanic_beacon",
+            () -> new com.steam.steamcore.item.MechanicBeaconItem(new Item.Properties().stacksTo(1)));
+
     public static final DeferredItem<Item> GAMMA_IGNITE =
             ITEMS.register("gamma_ignite",
                     () -> new com.steam.steamcore.item.GammaIgniteItem(

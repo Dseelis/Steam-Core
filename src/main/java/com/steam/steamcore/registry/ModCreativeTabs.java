@@ -34,6 +34,7 @@ public class ModCreativeTabs {
                                 output.accept(ModItems.WRENCH.get());
                                 output.accept(ModItems.EMPTY_ETERNAL_GEM.get());
                                 output.accept(ModItems.ETERNAL_CORE.get());
+                                output.accept(ModItems.MECHANIC_BEACON.get());
                                 output.accept(ModItems.ETERNAL_GEM.get());
                                 output.accept(ModItems.KINETIC_GENERATOR_ITEM.get());
 

@@ -5,7 +5,9 @@
   "mixins": [
     "GogglesItemMixin"
   ],
-  "client": [],
+  "client": [
+    "client.AwakeningCameraMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }
