@@ -15,6 +15,12 @@ public final class DialogueService {
     private DialogueService() {}
 
     public static boolean open(ServerPlayer player, String dialogueId) {
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get() || !com.steam.steamcore.Config.ENABLE_MECHANIC_NPC.get()) {
+            if (DialogueDefinition.MECHANIC_INTRO_ID.equals(dialogueId)
+                    || DialogueDefinition.MECHANIC_MAIN_ID.equals(dialogueId)) {
+                return false;
+            }
+        }
         String json = DialogueRegistry.toJson(dialogueId);
         if (json == null) {
             SteamCore.LOGGER.warn("Unknown dialogue id requested: {}", dialogueId);
@@ -26,6 +32,11 @@ public final class DialogueService {
     }
 
     public static boolean openAwakening(ServerPlayer player, String dialogueId) {
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get()
+                || !com.steam.steamcore.Config.ENABLE_CLOUDS_SPAWN.get()
+                || !com.steam.steamcore.Config.ENABLE_MECHANIC_NPC.get()) {
+            return false;
+        }
         String json = DialogueRegistry.toJson(dialogueId);
         if (json == null) {
             SteamCore.LOGGER.warn("Unknown awakening dialogue id requested: {}", dialogueId);

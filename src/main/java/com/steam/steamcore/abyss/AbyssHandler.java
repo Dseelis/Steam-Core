@@ -98,7 +98,7 @@ public class AbyssHandler {
                 40, 0.5, 1, 0.5, 0.01);
 
         player.sendSystemMessage(
-                Component.literal("The Abyss consumed you...")
+                Component.translatable("message.steamcore.abyss.consumed")
                         .withStyle(ChatFormatting.DARK_RED));
     }
 

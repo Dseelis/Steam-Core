@@ -94,8 +94,9 @@ public class EngineeringTableMenu extends AbstractContainerMenu {
 
         if (event.isCancelled()) {
             String reason = event.getCancelMessage();
-            player.displayClientMessage(net.minecraft.network.chat.Component.literal(
-                    reason == null || reason.isBlank() ? "Установка отменена скриптом KubeJS" : reason), true);
+            player.displayClientMessage(reason == null || reason.isBlank()
+                    ? net.minecraft.network.chat.Component.translatable("message.steamcore.engineering.cancelled_by_script")
+                    : net.minecraft.network.chat.Component.literal(reason), true);
             return;
         }
 

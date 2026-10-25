@@ -25,10 +25,6 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 public final class MobLevelHandler {
     public static final String LEVEL_KEY = "steamcore_mob_level";
     private static final String APPLIED_KEY = "steamcore_mob_level_applied";
-    private static final int MAX_LEVEL = 10;
-    private static final double HEALTH_PER_LEVEL = 0.10;
-    private static final double DAMAGE_PER_LEVEL = 0.07;
-    private static final double SPEED_PER_LEVEL = 0.015;
 
     private static final TagKey<EntityType<?>> LEVEL_EXEMPT = TagKey.create(
             Registries.ENTITY_TYPE,
@@ -56,6 +52,8 @@ public final class MobLevelHandler {
         var persistentData = mob.getPersistentData();
         if (persistentData.getBoolean(APPLIED_KEY)) return;
 
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get()
+                || !com.steam.steamcore.Config.ENABLE_BOSS_PROGRESSION.get()) return;
         StoryWorldData story = StoryWorldData.get(event.getLevel().getServer());
         if (!story.isMobProgressionEnabled()) return;
 
@@ -79,7 +77,7 @@ public final class MobLevelHandler {
         }
 
         int storyBonus = Math.max(0, bossFragments) / 2;
-        return Math.min(MAX_LEVEL, dimensionLevel + storyBonus);
+        return Math.min(com.steam.steamcore.Config.MOB_MAX_LEVEL.get(), dimensionLevel + storyBonus);
     }
 
     private static void applyLevel(Mob mob, int level) {
@@ -91,9 +89,13 @@ public final class MobLevelHandler {
 
         double levelSteps = level - 1.0;
         if (levelSteps > 0.0) {
-            addModifier(mob, Attributes.MAX_HEALTH, HEALTH_MODIFIER, HEALTH_PER_LEVEL * levelSteps);
-            addModifier(mob, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER, DAMAGE_PER_LEVEL * levelSteps);
-            addModifier(mob, Attributes.MOVEMENT_SPEED, SPEED_MODIFIER, SPEED_PER_LEVEL * levelSteps);
+            double healthPerLevel = com.steam.steamcore.Config.MOB_HEALTH_PER_LEVEL.get();
+            double damagePerLevel = com.steam.steamcore.Config.MOB_DAMAGE_PER_LEVEL.get();
+            double speedPerLevel = com.steam.steamcore.Config.MOB_SPEED_PER_LEVEL.get();
+
+            addModifier(mob, Attributes.MAX_HEALTH, HEALTH_MODIFIER, healthPerLevel * levelSteps);
+            addModifier(mob, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER, damagePerLevel * levelSteps);
+            addModifier(mob, Attributes.MOVEMENT_SPEED, SPEED_MODIFIER, speedPerLevel * levelSteps);
         }
 
         if (maxHealth != null) {
@@ -101,8 +103,9 @@ public final class MobLevelHandler {
         }
 
         Component originalName = mob.getCustomName();
-        Component name = Component.literal("Ур. " + level + " ")
-                .withStyle(ChatFormatting.GOLD)
+        Component prefix = Component.translatable("steamcore.mob.level_prefix", level)
+                .withStyle(ChatFormatting.GOLD);
+        Component name = Component.empty().append(prefix)
                 .append(originalName == null ? mob.getType().getDescription() : originalName);
         mob.setCustomName(name);
         mob.getPersistentData().putInt(LEVEL_KEY, level);

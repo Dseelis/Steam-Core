@@ -21,7 +21,7 @@ public class DisassemblyTableScreen extends AbstractContainerScreen<DisassemblyT
     protected void init() {
         super.init();
 
-        this.disassembleButton = Button.builder(Component.literal("Disassemble"), button -> {
+        this.disassembleButton = Button.builder(Component.translatable("gui.steamcore.disassembly_table.button"), button -> {
             if (this.minecraft != null && this.minecraft.gameMode != null) {
                 this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 0);
             }

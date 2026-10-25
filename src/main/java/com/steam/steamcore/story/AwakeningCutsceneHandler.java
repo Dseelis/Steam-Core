@@ -17,6 +17,7 @@ public final class AwakeningCutsceneHandler {
     private AwakeningCutsceneHandler() {}
 
     public static void start(ServerPlayer player) {
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get() || !com.steam.steamcore.Config.ENABLE_CLOUDS_SPAWN.get() || !com.steam.steamcore.Config.ENABLE_MECHANIC_NPC.get()) return;
         player.getPersistentData().putLong(START_TICK_KEY, player.serverLevel().getGameTime());
         MechanicNpcService.prepareCloudsMechanic(player.serverLevel());
     }
@@ -28,6 +29,7 @@ public final class AwakeningCutsceneHandler {
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get() || !com.steam.steamcore.Config.ENABLE_CLOUDS_SPAWN.get()) return;
         if (!(event.getEntity() instanceof ServerPlayer player)) return;
         var data = player.getPersistentData();
         if (!data.contains(START_TICK_KEY) || !data.getBoolean(PlayerDataKeys.INTRO_PENDING)

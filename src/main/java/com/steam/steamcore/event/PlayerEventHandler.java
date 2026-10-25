@@ -1,5 +1,6 @@
 package com.steam.steamcore.event;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.SteamCore;
 import com.steam.steamcore.command.DebugCommand;
 import com.steam.steamcore.item.GammaIgniteItem;
@@ -48,9 +49,71 @@ public class PlayerEventHandler {
         var tag = player.getPersistentData();
         StoryWorldData storyData = StoryWorldData.get(player.server);
 
-        if (storyData.isDifficultyChosen()) {
-            StoryService.grantMechanicBeacon(player);
+        boolean storyEnabled = Config.ENABLE_STORY.get();
+        boolean mechanicNpcEnabled = storyEnabled && Config.ENABLE_MECHANIC_NPC.get();
+        boolean cloudsSpawnEnabled = storyEnabled && Config.ENABLE_CLOUDS_SPAWN.get() && Config.ENABLE_MECHANIC_NPC.get();
+
+        if (!storyEnabled) {
             MechanicNpcService.ensureOverworldMechanic(overworld);
+            ServerLevel clouds = player.getServer().getLevel(CLOUDS_DIMENSION);
+            if (clouds != null) {
+                MechanicNpcService.ensureCloudsMechanic(clouds);
+            }
+
+            if (tag.getBoolean(PlayerDataKeys.INTRO_PENDING) || player.level().dimension().equals(CLOUDS_DIMENSION)) {
+                tag.putBoolean(PlayerDataKeys.INTRO_PENDING, false);
+                tag.putBoolean(PlayerDataKeys.SPAWNED, true);
+                StoryService.sendToOverworld(player);
+                return;
+            }
+
+            if (!tag.getBoolean(PlayerDataKeys.SPAWNED)) {
+                BlockPos spawn = overworld.getSharedSpawnPos();
+                int searchStartY = Math.min(overworld.getMaxBuildHeight() - 2, 200);
+                BlockPos safePos = TeleportUtils.findSafePosition(overworld, spawn.getX(), spawn.getZ(), searchStartY);
+                if (safePos == null) safePos = spawn.above();
+                TeleportUtils.teleportTo(player, overworld, safePos);
+                tag.putBoolean(PlayerDataKeys.SPAWNED, true);
+            }
+            return;
+        }
+
+        if (mechanicNpcEnabled) {
+            if (storyData.isDifficultyChosen()) {
+                StoryService.grantMechanicBeacon(player);
+                MechanicNpcService.ensureOverworldMechanic(overworld);
+            }
+        } else {
+            MechanicNpcService.ensureOverworldMechanic(overworld);
+        }
+
+        if (!cloudsSpawnEnabled) {
+            ServerLevel clouds = player.getServer().getLevel(CLOUDS_DIMENSION);
+            if (clouds != null) {
+                MechanicNpcService.ensureCloudsMechanic(clouds);
+            }
+
+            if (tag.getBoolean(PlayerDataKeys.INTRO_PENDING) || player.level().dimension().equals(CLOUDS_DIMENSION)) {
+                tag.putBoolean(PlayerDataKeys.INTRO_PENDING, false);
+                tag.putBoolean(PlayerDataKeys.SPAWNED, true);
+                StoryService.sendToOverworld(player);
+                return;
+            }
+
+            if (!tag.getBoolean(PlayerDataKeys.SPAWNED)) {
+                BlockPos spawn = overworld.getSharedSpawnPos();
+                int searchStartY = Math.min(overworld.getMaxBuildHeight() - 2, 200);
+                BlockPos safePos = TeleportUtils.findSafePosition(overworld, spawn.getX(), spawn.getZ(), searchStartY);
+                if (safePos == null) safePos = spawn.above();
+                TeleportUtils.teleportTo(player, overworld, safePos);
+                tag.putBoolean(PlayerDataKeys.SPAWNED, true);
+                tag.putBoolean(PlayerDataKeys.INTRO_PENDING, false);
+                if (mechanicNpcEnabled) {
+                    StoryService.grantMechanicBeacon(player);
+                    MechanicNpcService.ensureOverworldMechanic(overworld);
+                }
+            }
+            return;
         }
 
         if (!storyData.isDifficultyChosen()) {

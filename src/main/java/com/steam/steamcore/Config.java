@@ -23,6 +23,16 @@ public class Config {
     // DEV
     public static final ModConfigSpec.BooleanValue ENABLE_WIP_ITEMS;
 
+    // STORY
+    public static final ModConfigSpec.BooleanValue ENABLE_STORY;
+    public static final ModConfigSpec.BooleanValue ENABLE_CLOUDS_SPAWN;
+    public static final ModConfigSpec.BooleanValue ENABLE_MECHANIC_NPC;
+    public static final ModConfigSpec.BooleanValue ENABLE_BOSS_PROGRESSION;
+    public static final ModConfigSpec.IntValue MOB_MAX_LEVEL;
+    public static final ModConfigSpec.DoubleValue MOB_HEALTH_PER_LEVEL;
+    public static final ModConfigSpec.DoubleValue MOB_DAMAGE_PER_LEVEL;
+    public static final ModConfigSpec.DoubleValue MOB_SPEED_PER_LEVEL;
+
     static {
 
         // GENERAL
@@ -84,6 +94,43 @@ public class Config {
                 .defineInRange("abyssDamage", 4, 0, 40);
 
         BUILDER.pop();
+ 
+         // STORY
+         BUILDER.push("story");
+
+         ENABLE_STORY = BUILDER
+                 .comment("Enable story progression and all story-related features")
+                 .define("enableStory", true);
+
+         ENABLE_CLOUDS_SPAWN = BUILDER
+                 .comment("Enable initial player spawn in the clouds dimension")
+                 .define("enableCloudsSpawn", true);
+
+         ENABLE_MECHANIC_NPC = BUILDER
+                 .comment("Enable the Mechanic NPC spawning in the clouds and overworld")
+                 .define("enableMechanicNpc", true);
+
+         ENABLE_BOSS_PROGRESSION = BUILDER
+                 .comment("Enable boss progression and mob level scaling (default: false)")
+                 .define("enableBossProgression", false);
+
+         MOB_MAX_LEVEL = BUILDER
+                 .comment("Maximum mob level scaling")
+                 .defineInRange("mobMaxLevel", 10, 1, 100);
+
+         MOB_HEALTH_PER_LEVEL = BUILDER
+                 .comment("Bonus max health multiplier per level above 1 (0.10 = +10%)")
+                 .defineInRange("mobHealthPerLevel", 0.10, 0.0, 10.0);
+
+         MOB_DAMAGE_PER_LEVEL = BUILDER
+                 .comment("Bonus attack damage multiplier per level above 1 (0.07 = +7%)")
+                 .defineInRange("mobDamagePerLevel", 0.07, 0.0, 10.0);
+
+         MOB_SPEED_PER_LEVEL = BUILDER
+                 .comment("Bonus movement speed multiplier per level above 1 (0.015 = +1.5%)")
+                 .defineInRange("mobSpeedPerLevel", 0.015, 0.0, 1.0);
+
+         BUILDER.pop();
     }
 
     public static final ModConfigSpec SPEC = BUILDER.build();

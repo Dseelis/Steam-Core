@@ -59,7 +59,7 @@ public class EternalInfuserBlock extends BaseEntityBlock {
             if (be instanceof EternalInfuserBlockEntity infuser) {
                 serverPlayer.openMenu(new SimpleMenuProvider(
                         (id, inv, p) -> new EternalInfuserMenu(id, inv, infuser, infuser.getContainerData()),
-                        net.minecraft.network.chat.Component.literal("Eternal Infuser")
+                        net.minecraft.network.chat.Component.translatable("block.steamcore.eternal_infuser")
                 ), pos);
             }
         }

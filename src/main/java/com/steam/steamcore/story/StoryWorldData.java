@@ -33,7 +33,9 @@ public final class StoryWorldData extends SavedData {
     }
 
     public boolean isMobProgressionEnabled() {
-        return mobProgressionEnabled;
+        return com.steam.steamcore.Config.ENABLE_STORY.get()
+                && com.steam.steamcore.Config.ENABLE_BOSS_PROGRESSION.get()
+                && (!difficultyChosen || mobProgressionEnabled);
     }
 
     public int getBossProgressPoints() {

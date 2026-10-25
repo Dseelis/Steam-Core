@@ -1,5 +1,6 @@
 package com.steam.steamcore.story;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.SteamCore;
 import com.steam.steamcore.utils.PlayerDataKeys;
 import com.steam.steamcore.utils.TeleportUtils;
@@ -24,6 +25,8 @@ public final class StoryService {
     private StoryService() {}
 
     public static void chooseDifficulty(ServerPlayer player, String actionId) {
+        if (!Config.ENABLE_STORY.get()) return;
+
         boolean enabled;
         if (ENABLE_PROGRESSION.equals(actionId)) {
             enabled = true;
@@ -45,8 +48,13 @@ public final class StoryService {
         }
         data.chooseMobProgression(enabled);
         if (!introPending) {
-            player.sendSystemMessage(net.minecraft.network.chat.Component.translatable(
-                    enabled ? "message.steamcore.progression.enabled" : "message.steamcore.progression.disabled"));
+            if (enabled && !Config.ENABLE_BOSS_PROGRESSION.get()) {
+                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable(
+                        "message.steamcore.progression.disabled_in_config"));
+            } else {
+                player.sendSystemMessage(net.minecraft.network.chat.Component.translatable(
+                        enabled ? "message.steamcore.progression.enabled" : "message.steamcore.progression.disabled"));
+            }
             return;
         }
         player.getPersistentData().putBoolean(PlayerDataKeys.INTRO_PENDING, false);
@@ -65,21 +73,29 @@ public final class StoryService {
         BlockPos safePos = TeleportUtils.findSafePosition(overworld, spawn.getX(), spawn.getZ(), searchStartY);
         if (safePos == null) safePos = spawn.above();
         TeleportUtils.teleportTo(player, overworld, safePos);
-        giveMechanicBeacon(player);
-        MechanicNpcService.ensureOverworldMechanic(overworld);
+        if (Config.ENABLE_STORY.get() && Config.ENABLE_MECHANIC_NPC.get()) {
+            giveMechanicBeacon(player);
+            MechanicNpcService.ensureOverworldMechanic(overworld);
+        }
     }
 
     public static boolean returnToClouds(ServerPlayer player) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_CLOUDS_SPAWN.get()) return false;
         ServerLevel clouds = player.server.getLevel(CLOUDS_DIMENSION);
         if (clouds == null) return false;
 
-        MechanicNpcService.ensureCloudsMechanic(clouds);
+        if (Config.ENABLE_MECHANIC_NPC.get()) {
+            MechanicNpcService.ensureCloudsMechanic(clouds);
+        }
         TeleportUtils.teleportTo(player, clouds, CLOUDS_RETURN_POSITION);
-        MechanicNpcService.bringCloudsMechanicTo(clouds, CLOUDS_RETURN_POSITION);
+        if (Config.ENABLE_MECHANIC_NPC.get()) {
+            MechanicNpcService.bringCloudsMechanicTo(clouds, CLOUDS_RETURN_POSITION);
+        }
         return true;
     }
 
     private static void giveMechanicBeacon(ServerPlayer player) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) return;
         var data = player.getPersistentData();
         if (data.getBoolean("steamcore_mechanic_beacon_given")) return;
         data.putBoolean("steamcore_mechanic_beacon_given", true);

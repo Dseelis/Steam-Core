@@ -55,14 +55,14 @@ public class GammaIgniteItem extends Item {
 
         if (!Config.ENABLE_WIP_ITEMS.get()) {
             serverPlayer.sendSystemMessage(
-                    Component.literal("Gamma Ignite is disabled in config.")
+                    Component.translatable("message.steamcore.gamma_ignite.disabled")
                             .withStyle(ChatFormatting.RED));
             return InteractionResultHolder.fail(stack);
         }
 
         if (level.dimension() == Level.OVERWORLD) {
             serverPlayer.sendSystemMessage(
-                    Component.literal("Gamma Ignite cannot be used in the Overworld.")
+                    Component.translatable("message.steamcore.gamma_ignite.overworld_blocked")
                             .withStyle(ChatFormatting.RED));
             return InteractionResultHolder.fail(stack);
         }
@@ -94,7 +94,7 @@ public class GammaIgniteItem extends Item {
         }
 
         serverPlayer.sendSystemMessage(
-                Component.literal("Gamma ignition charging...")
+                Component.translatable("message.steamcore.gamma_ignite.charging")
                         .withStyle(ChatFormatting.LIGHT_PURPLE));
 
         pendingTeleports.put(serverPlayer.getUUID(), TELEPORT_DELAY);
@@ -138,9 +138,9 @@ public class GammaIgniteItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context,
                                 List<Component> tooltip, TooltipFlag flag) {
         int usesLeft = MAX_USES - stack.getDamageValue();
-        tooltip.add(Component.literal("Teleports you to your bed spawn.")
+        tooltip.add(Component.translatable("tooltip.steamcore.gamma_ignite.desc")
                 .withStyle(ChatFormatting.GRAY));
-        tooltip.add(Component.literal("Uses left: " + usesLeft)
+        tooltip.add(Component.translatable("tooltip.steamcore.gamma_ignite.uses_left", usesLeft)
                 .withStyle(ChatFormatting.DARK_PURPLE));
     }
 }

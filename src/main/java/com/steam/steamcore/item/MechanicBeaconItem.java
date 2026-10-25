@@ -19,6 +19,10 @@ public final class MechanicBeaconItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (player instanceof ServerPlayer serverPlayer && !level.isClientSide) {
+            if (!com.steam.steamcore.Config.ENABLE_STORY.get() || !com.steam.steamcore.Config.ENABLE_CLOUDS_SPAWN.get()) {
+                serverPlayer.displayClientMessage(Component.translatable("message.steamcore.story_disabled"), true);
+                return InteractionResultHolder.fail(stack);
+            }
             if (StoryService.returnToClouds(serverPlayer)) {
                 serverPlayer.displayClientMessage(Component.translatable("message.steamcore.mechanic_beacon"), true);
             }

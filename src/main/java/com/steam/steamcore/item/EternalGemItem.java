@@ -66,7 +66,7 @@ public class EternalGemItem extends Item {
         }
 
         serverPlayer.sendSystemMessage(
-                Component.literal("The gem pulses with ancient energy...")
+                Component.translatable("message.steamcore.eternal_gem.used")
                         .withStyle(ChatFormatting.LIGHT_PURPLE)
         );
 
@@ -86,14 +86,14 @@ public class EternalGemItem extends Item {
                                 List<Component> tooltip, TooltipFlag flag) {
         int chargesLeft = MAX_CHARGES - stack.getDamageValue();
 
-        tooltip.add(Component.literal("A gem pulsing with the energy of a forgotten age.")
+        tooltip.add(Component.translatable("tooltip.steamcore.eternal_gem.desc")
                 .withStyle(ChatFormatting.ITALIC, ChatFormatting.GRAY));
         tooltip.add(Component.empty());
-        tooltip.add(Component.literal("Use: ")
+        tooltip.add(Component.translatable("tooltip.steamcore.eternal_gem.use")
                 .withStyle(ChatFormatting.WHITE)
-                .append(Component.literal("Regeneration II + Resistance I (10s)")
+                .append(Component.translatable("tooltip.steamcore.eternal_gem.effect")
                         .withStyle(ChatFormatting.AQUA)));
-        tooltip.add(Component.literal("Charges: ")
+        tooltip.add(Component.translatable("tooltip.steamcore.eternal_gem.charges")
                 .withStyle(ChatFormatting.WHITE)
                 .append(Component.literal(chargesLeft + " / " + MAX_CHARGES)
                         .withStyle(chargesLeft > 0 ? ChatFormatting.LIGHT_PURPLE : ChatFormatting.DARK_RED)));

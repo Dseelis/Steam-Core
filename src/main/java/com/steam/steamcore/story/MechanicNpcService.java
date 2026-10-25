@@ -1,5 +1,6 @@
 package com.steam.steamcore.story;
 
+import com.steam.steamcore.Config;
 import com.steam.steamcore.story.dialogue.DialogueDefinition;
 import com.steam.steamcore.story.dialogue.DialogueService;
 import com.steam.steamcore.utils.TeleportUtils;
@@ -19,14 +20,33 @@ public final class MechanicNpcService {
     private MechanicNpcService() {}
 
     public static void ensureCloudsMechanic(ServerLevel level) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) {
+            removeMechanic(level, CLOUDS_PLATFORM);
+            return;
+        }
         ensure(level, CLOUDS_PLATFORM, DialogueDefinition.MECHANIC_INTRO_ID, true);
     }
 
     public static void ensureOverworldMechanic(ServerLevel level) {
-        ensure(level, workshopPlayerPosition(level), DialogueDefinition.MECHANIC_MAIN_ID, false);
+        BlockPos workshopPos = workshopPlayerPosition(level);
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) {
+            removeMechanic(level, workshopPos);
+            return;
+        }
+        ensure(level, workshopPos, DialogueDefinition.MECHANIC_MAIN_ID, false);
+    }
+
+    public static void removeMechanic(ServerLevel level, BlockPos base) {
+        AABB search = new AABB(base).inflate(32, 16, 32);
+        var existing = level.getEntitiesOfClass(Villager.class, search,
+                villager -> villager.getTags().contains(NPC_TAG));
+        for (Villager villager : existing) {
+            villager.discard();
+        }
     }
 
     public static void prepareCloudsMechanic(ServerLevel level) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) return;
         Villager npc = findCloudsMechanic(level);
         if (npc == null) return;
         npc.setPos(5.5, 129.0, 0.5);
@@ -35,6 +55,7 @@ public final class MechanicNpcService {
     }
 
     public static void finishCloudsMechanic(ServerLevel level) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) return;
         Villager npc = findCloudsMechanic(level);
         if (npc == null) return;
         npc.setPos(3.5, 129.0, 0.5);
@@ -44,6 +65,7 @@ public final class MechanicNpcService {
     }
 
     public static void bringCloudsMechanicTo(ServerLevel level, BlockPos playerPosition) {
+        if (!Config.ENABLE_STORY.get() || !Config.ENABLE_MECHANIC_NPC.get()) return;
         ensureCloudsMechanic(level);
         Villager npc = findCloudsMechanic(level);
         if (npc == null) return;

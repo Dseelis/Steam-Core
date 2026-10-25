@@ -66,7 +66,7 @@ public class DisassemblyTableBlock extends BaseEntityBlock {
             if (be instanceof DisassemblyTableBlockEntity disassemblyBE) {
                 serverPlayer.openMenu(new SimpleMenuProvider(
                         (id, inv, p) -> new DisassemblyTableMenu(id, inv, disassemblyBE),
-                        net.minecraft.network.chat.Component.literal("Disassembly Table")
+                        net.minecraft.network.chat.Component.translatable("block.steamcore.disassembly_table")
                 ), pos);
             }
         }

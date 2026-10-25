@@ -24,7 +24,7 @@ public class DialogueScreen extends Screen {
     private final List<Button> optionButtons = new ArrayList<>();
 
     public DialogueScreen(String dialogueId, DialogueDefinition definition) {
-        super(Component.literal("Диалог"));
+        super(Component.translatable("screen.steamcore.dialogue"));
         this.dialogueId = dialogueId;
         this.definition = definition;
         setNode(definition.startNode());

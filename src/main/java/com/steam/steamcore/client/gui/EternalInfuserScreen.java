@@ -51,7 +51,7 @@ public class EternalInfuserScreen extends AbstractContainerScreen<EternalInfuser
         
         // Show energy text on hover
         if (mouseX >= this.leftPos + 80 && mouseX <= this.leftPos + 90 && mouseY >= this.topPos + 20 && mouseY <= this.topPos + 70) {
-            guiGraphics.renderTooltip(this.font, Component.literal(this.menu.getEnergy() + " / " + this.menu.getMaxEnergy() + " FE"), mouseX, mouseY);
+            guiGraphics.renderTooltip(this.font, Component.translatable("gui.steamcore.eternal_infuser.energy", this.menu.getEnergy(), this.menu.getMaxEnergy()), mouseX, mouseY);
         }
     }
 }

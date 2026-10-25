@@ -18,6 +18,12 @@ public final class NpcDialogueHandler {
         if (event.getHand() != InteractionHand.MAIN_HAND || !(event.getEntity() instanceof ServerPlayer player)) return;
         String dialogueId = event.getTarget().getPersistentData().getString(DialogueService.ENTITY_DIALOGUE_KEY);
         if (dialogueId.isBlank()) return;
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get() || !com.steam.steamcore.Config.ENABLE_MECHANIC_NPC.get()) {
+            if (com.steam.steamcore.story.dialogue.DialogueDefinition.MECHANIC_INTRO_ID.equals(dialogueId)
+                    || com.steam.steamcore.story.dialogue.DialogueDefinition.MECHANIC_MAIN_ID.equals(dialogueId)) {
+                return;
+            }
+        }
         DialogueService.openNpcDialogue(player, dialogueId);
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);

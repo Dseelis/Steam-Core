@@ -21,6 +21,10 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 public final class BossProgressionHandler {
     private static final TagKey<EntityType<?>> BOSS_ENTITIES = TagKey.create(
             Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("c", "bosses"));
+    private static final TagKey<EntityType<?>> BOSS_1_POINT = TagKey.create(
+            Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(SteamCore.MODID, "boss_points_1"));
+    private static final TagKey<EntityType<?>> BOSS_2_POINTS = TagKey.create(
+            Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(SteamCore.MODID, "boss_points_2"));
 
     private BossProgressionHandler() {}
 
@@ -34,15 +38,17 @@ public final class BossProgressionHandler {
         ResourceLocation entityId = BuiltInRegistries.ENTITY_TYPE.getKey(type);
         int points;
 
-        if ("cataclysm".equals(entityId.getNamespace()) && type.is(BOSS_ENTITIES)) {
+        if (type.is(BOSS_2_POINTS) || type == EntityType.ENDER_DRAGON || type == EntityType.WITHER) {
+            points = 2;
+        } else if (type.is(BOSS_1_POINT) || ("cataclysm".equals(entityId.getNamespace()) && type.is(BOSS_ENTITIES))) {
             // Cataclysm boss defeats count at half strength versus a major vanilla boss/shard pair.
             points = 1;
-        } else if (type == EntityType.ENDER_DRAGON || type == EntityType.WITHER) {
-            points = 2;
         } else {
             return;
         }
 
+        if (!com.steam.steamcore.Config.ENABLE_STORY.get()
+                || !com.steam.steamcore.Config.ENABLE_BOSS_PROGRESSION.get()) return;
         StoryWorldData story = StoryWorldData.get(entity.level().getServer());
         if (!story.isMobProgressionEnabled()) return;
 
@@ -59,7 +65,7 @@ public final class BossProgressionHandler {
 
         if (newLevelBonus > previousLevelBonus) {
             entity.level().getServer().getPlayerList().broadcastSystemMessage(
-                    Component.literal("Поражение босса изменило мир: новые враждебные мобы станут сильнее.")
+                    Component.translatable("message.steamcore.boss_defeated_progression")
                             .withStyle(ChatFormatting.DARK_RED), false);
         }
     }

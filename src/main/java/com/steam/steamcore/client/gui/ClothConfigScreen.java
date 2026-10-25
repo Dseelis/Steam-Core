@@ -91,6 +91,65 @@ public class ClothConfigScreen {
                 .setSaveConsumer(Config.ABYSS_DAMAGE::set)
                 .build());
 
+        // STORY CATEGORY
+        ConfigCategory story = builder.getOrCreateCategory(Component.translatable("steamcore.configuration.story"));
+
+        story.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableStory"), Config.ENABLE_STORY.get())
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.enableStory.tooltip"))
+                .setSaveConsumer(Config.ENABLE_STORY::set)
+                .build());
+
+        story.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableCloudsSpawn"), Config.ENABLE_CLOUDS_SPAWN.get())
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.enableCloudsSpawn.tooltip"))
+                .setSaveConsumer(Config.ENABLE_CLOUDS_SPAWN::set)
+                .build());
+
+        story.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableMechanicNpc"), Config.ENABLE_MECHANIC_NPC.get())
+                .setDefaultValue(true)
+                .setTooltip(Component.translatable("steamcore.configuration.enableMechanicNpc.tooltip"))
+                .setSaveConsumer(Config.ENABLE_MECHANIC_NPC::set)
+                .build());
+
+        story.addEntry(entryBuilder.startBooleanToggle(Component.translatable("steamcore.configuration.enableBossProgression"), Config.ENABLE_BOSS_PROGRESSION.get())
+                .setDefaultValue(false)
+                .setTooltip(Component.translatable("steamcore.configuration.enableBossProgression.tooltip"))
+                .setSaveConsumer(Config.ENABLE_BOSS_PROGRESSION::set)
+                .build());
+
+        story.addEntry(entryBuilder.startIntField(Component.translatable("steamcore.configuration.mobMaxLevel"), Config.MOB_MAX_LEVEL.get())
+                .setDefaultValue(10)
+                .setMin(1)
+                .setMax(100)
+                .setTooltip(Component.translatable("steamcore.configuration.mobMaxLevel.tooltip"))
+                .setSaveConsumer(Config.MOB_MAX_LEVEL::set)
+                .build());
+
+        story.addEntry(entryBuilder.startDoubleField(Component.translatable("steamcore.configuration.mobHealthPerLevel"), Config.MOB_HEALTH_PER_LEVEL.get())
+                .setDefaultValue(0.10)
+                .setMin(0.0)
+                .setMax(10.0)
+                .setTooltip(Component.translatable("steamcore.configuration.mobHealthPerLevel.tooltip"))
+                .setSaveConsumer(Config.MOB_HEALTH_PER_LEVEL::set)
+                .build());
+
+        story.addEntry(entryBuilder.startDoubleField(Component.translatable("steamcore.configuration.mobDamagePerLevel"), Config.MOB_DAMAGE_PER_LEVEL.get())
+                .setDefaultValue(0.07)
+                .setMin(0.0)
+                .setMax(10.0)
+                .setTooltip(Component.translatable("steamcore.configuration.mobDamagePerLevel.tooltip"))
+                .setSaveConsumer(Config.MOB_DAMAGE_PER_LEVEL::set)
+                .build());
+
+        story.addEntry(entryBuilder.startDoubleField(Component.translatable("steamcore.configuration.mobSpeedPerLevel"), Config.MOB_SPEED_PER_LEVEL.get())
+                .setDefaultValue(0.015)
+                .setMin(0.0)
+                .setMax(1.0)
+                .setTooltip(Component.translatable("steamcore.configuration.mobSpeedPerLevel.tooltip"))
+                .setSaveConsumer(Config.MOB_SPEED_PER_LEVEL::set)
+                .build());
+
         builder.setSavingRunnable(() -> {
             Config.SPEC.save();
         });
